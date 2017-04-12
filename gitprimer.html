@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Pedro Vasconcelos, DCC/FCUP">
+  <title>Introdução ao Git</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="css/dzslides.css">
+</head>
+<body>
+<section class="title">
+  <h1 class="title">Introdução ao <em>Git</em></h1>
+  <footer>
+    <span class="author">Pedro Vasconcelos, DCC/FCUP</span> · <span class="date">Abril 2017</span>
+  </footer>
+</section>
+<section id="controlo-de-versões" class="titleslide slide level1"><h1>Controlo de Versões</h1></section><section id="controlo-de-versões-1" class="slide level2">
+<h2>Controlo de Versões</h2>
+<p>Sistemas de controlo de versões (VCS) são ferramentas para:</p>
+<ul>
+<li>arquivar ficheiros de um projeto (código-fonte e outros)</li>
+<li>registar alterações durante o desenvolvimento</li>
+<li>desfazer alterações ou recuperar versões anteriores</li>
+<li>sincronizar diferentes computadores</li>
+<li>colaborar com programadores (locais ou à distância)</li>
+<li>separar &quot;troncos&quot; de desenvolvimento (e.g. produção/desenvolvimento)</li>
+</ul>
+</section><section id="sistemas-locais" class="slide level2">
+<h2>Sistemas Locais</h2>
+<p>Os primeiros <em>VCS</em> registavam modificações de ficheiros apenas numa base de dados local.</p>
+<p><br />
+Exemplos: <em>SCCS</em>, <em>RCS</em>.</p>
+</section><section id="sistemas-locais-2" class="slide level2">
+<h2>Sistemas Locais (2)</h2>
+<p align="center">
+<img src="images/local-version-control-600.png" alt="image" />
+</p>
+</section><section id="sistemas-locais-3" class="slide level2">
+<h2>Sistemas Locais (3)</h2>
+<p>Permitem:</p>
+<ul>
+<li>registar e desfazer edições;</li>
+<li>recuperar versões anteriores.</li>
+</ul>
+<p>Não permitem:</p>
+<ul>
+<li>sincronização entre computadores;</li>
+<li>colaboração entre programadores.</li>
+</ul>
+</section><section id="sistemas-centralizados" class="slide level2">
+<h2>Sistemas Centralizados</h2>
+<p>Os <em>sistemas centralizados</em> registam alterações numa base de dados central; todos os clientes utilizam a mesma base de dados.</p>
+<p><br />
+Exemplos: <em>CVS</em>, <em>SVN</em></p>
+</section><section id="sistemas-centralizados-2" class="slide level2">
+<h2>Sistemas Centralizados (2)</h2>
+<p align="center">
+<img src="images/centralized-800px.png" alt="image" />
+</p>
+</section><section id="sistemas-centralizados-3" class="slide level2">
+<h2>Sistemas Centralizados (3)</h2>
+<p>Vantagens sobre os sistemas locais:</p>
+<ul>
+<li>sincronização entre computadores</li>
+<li>colaboração entre programadores</li>
+</ul>
+<p>Limitações:</p>
+<ul>
+<li>não permitem trabalhar <em>off-line</em> (é necessário acesso ao servidor para registar alterações)</li>
+<li>o servidor constitui um <em>ponto crítico de falha</em></li>
+</ul>
+</section><section id="sistemas-distribuídos" class="slide level2">
+<h2>Sistemas Distribuídos</h2>
+<p>Nos sistemas distribuidos cada cópia do repositório mantém também a <em>base de dados de modificações</em>.</p>
+<p><br />
+Exemplos: <em>GNU arch</em>, <em>Darcs</em>, <em>Mercurial</em>, <em>Git</em>.</p>
+</section><section id="sistemas-distribuídos-2" class="slide level2">
+<h2>Sistemas Distribuídos (2)</h2>
+<p align="center">
+<img src="images/distributed-600.png" alt="image" />
+</p>
+</section><section id="sistemas-distribuidos-3" class="slide level2">
+<h2>Sistemas Distribuidos (3)</h2>
+<p>Vantagens sobre sistemas centralizados:</p>
+<ul>
+<li>todas as cópias do repositório contêm a historia completa</li>
+<li>permitem registar alterações mesmo sem acesso a rede</li>
+<li>não há um ponto crítico de falha: qualquer cópia do repositório contém a história completa</li>
+<li>facilitam a introdução de mudanças experimentais separadas das estáveis (&quot;<em>branching</em>&quot;)</li>
+</ul>
+<p>Desvantagens:</p>
+<ul>
+<li>necessitam de mais espaço em disco</li>
+<li>a utilização pode ser mais complexa do que os sistemas tradicionais</li>
+</ul>
+</section>
+<section id="git" class="titleslide slide level1"><h1>Git</h1></section><section id="o-que-é-o-git" class="slide level2">
+<h2>O que é o <em>Git</em>?</h2>
+<ul>
+<li>Um sistema de controlo de versões distribuído desenvolvido desde 2005</li>
+<li>Concebido para gestão do código do <em>kernel</em> Linux</li>
+<li>Muito usado em projetos <em>open-source</em></li>
+<li>Características:
+<ul>
+<li>conceção simples mas poderosa</li>
+<li>adequado a projectos grandes, com muitos ficheiros e com história longa</li>
+<li>eficiente em espaço e recursos computacionais</li>
+<li>suporte para desenvolvimento não-linear (&quot;<em>branching</em>&quot;)</li>
+<li>completamente distribuído</li>
+</ul></li>
+</ul>
+</section><section id="o-git-dá-te-super-poderes" class="slide level2">
+<h2>O <em>Git</em> dá-te super-poderes!</h2>
+<p>Utilizar <em>Git</em> é um método de trabalho valioso:</p>
+<ul>
+<li>Garantimos a <strong>integridade</strong> dos ficheiros<br />
+(diga adeus às <em>pen-drives</em> para transportar ficheiros entre casa e trabalho)</li>
+<li>Usando um repositório remoto, <strong>temos sempre um <em>backup</em></strong> caso algo corra mal</li>
+<li>Permite <strong>experimentar e explorar</strong> sem termos medo das consequências (dá sempre para voltar atrás caso seja necessário)</li>
+<li>As mensagens de <em>commits</em> permitem-nos rever os <strong>motivos das alterações</strong></li>
+</ul>
+</section><section id="como-funciona" class="slide level2">
+<h2>Como funciona</h2>
+<ul>
+<li>Cada repositório mantém um conjunto de ficheiros e diretórios (um mini-sistema de ficheiros)</li>
+<li>Podem mudar ao longo do tempo:
+<ul>
+<li>acrescentar/remover ficheiros</li>
+<li>editar o conteúdo</li>
+</ul></li>
+<li>Quando o utilizador regista uma modificação (<em>commit</em>):
+<ul>
+<li>guarda o estado atual de <em>todos</em> os ficheiros marcados (<em>snapshot</em>)</li>
+<li>para os ficheiros não modificados: guarda apenas uma referência para o estado anterior</li>
+</ul></li>
+<li>Um repositório <em>Git</em> é uma sequência destes &quot;<em>snapshots</em>&quot;</li>
+</ul>
+</section><section id="fluxo-de-trabalho-básico" class="slide level2">
+<h2>Fluxo de trabalho básico</h2>
+<p>Três fases:</p>
+<ol type="1">
+<li><strong>Modify</strong>: modificar os ficheiros no directório de trabalho.</li>
+<li><strong>Stage</strong>: adicionar <em>snapshots</em> dos ficheiros à &quot;área de estágio&quot; (<em>staging area</em>).</li>
+<li><strong>Commit</strong>: registar esse <em>snapshots</em> na base de dados do <em>Git</em> juntamente com uma <em>mensagem</em> de arquivo.</li>
+</ol>
+</section><section id="operações-básicas" class="slide level2">
+<h2>Operações básicas</h2>
+<p align="center">
+<img src="images/the-three-states.png" alt="image" />
+</p>
+</section><section id="commit" class="slide level2">
+<h2><em>Commit</em></h2>
+<ul>
+<li>Uma &quot;imagem&quot; dos ficheiros tal como estavam quando estagiados</li>
+<li>Uma <strong>mensagem de arquivo</strong> que descreve a alteração efetuada</li>
+<li>Meta-informação do autor e data</li>
+</ul>
+<p align="center">
+<img src="images/commit-repository-data.png" alt="image" />
+</p>
+<p>Qualquer <em>commit</em> pode ser inspecionado e recuperado se assim quisermos.</p>
+</section><section id="ciclo-de-vida" class="slide level2">
+<h2>Ciclo de Vida</h2>
+<p>Os ficheiros no directório de trabalho podem estar em quatro estados diferentes em relação ao <em>commit</em> atual.</p>
+<p align="center">
+<img src="images/file-status-lifecycle.png" alt="image" />
+</p>
+<!--
+# Git Básico - Repositórios remotos
+
+Os comandos básicos para trabalhar com repositório remoto são
+
+-   *clone*: “clonar” um repositório remoto (faz uma cópia local
+    completa).
+-   *pull*: obter alterações de um repositório remoto.
+-   *push*: enviar alterações para um repositório remoto.
+
+Vamos ver alguns exemplos.
+
+
+# Git Básico - Vantagens
+
+Vantagens de usar Git:
+
+-   Quase todas as operações são locais.
+-   “*Snapshots*” registados (*committed*) são sempre mantidos.
+-   Forte suporte para desenvolvimento não-linear.
+
+-->
+</section>
+<section id="utilização-do-git" class="titleslide slide level1"><h1>Utilização do <em>Git</em></h1></section><section id="configuração-inicial" class="slide level2">
+<h2>Configuração inicial</h2>
+<p>Antes de usar <em>Git</em> pela primeira vez:</p>
+<h4 id="escolher-a-sua-identidade">Escolher a sua identidade</h4>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> config --global user.name <span class="st">&quot;John Doe&quot;</span>
+<span class="fu">git</span> config --global user.email john@doe.com</code></pre></div>
+<h4 id="mais-configurações-opcionais">Mais configurações (opcionais)</h4>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> config --list</code></pre></div>
+<h4 id="obter-ajuda">Obter ajuda</h4>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> help </code></pre></div>
+</section><section id="inicializar-um-repositório-local" class="slide level2">
+<h2>Inicializar um repositório local</h2>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">mkdir</span> my_repo
+<span class="bu">cd</span> my_repo
+<span class="fu">git</span> init</code></pre></div>
+<ul>
+<li>inicializa um diretório <code>my_repo/.git</code> que vai conter a base de dados do repositório</li>
+<li>o repositório começa <em>vazio</em>: temos de adicionar ficheiros e/ou diretórios</li>
+</ul>
+</section><section id="adicionar-ficheiros" class="slide level2">
+<h2>Adicionar ficheiros</h2>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> add ficheiro1
+<span class="fu">git</span> add ficheiro2 </code></pre></div>
+<p><br />
+Podemos também adicionar vários ficheiros de uma só vez:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> add ficheiro1 ficheiro2 </code></pre></div>
+<p><br />
+Os ficheiros ficam na <em>área de estágio</em> --- temos de fazer um <em>commit</em> para os registar na base de dados do <em>Git</em>.</p>
+</section><section id="primeiro-commit" class="slide level2">
+<h2>Primeiro <em>Commit</em></h2>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> commit -m <span class="st">&quot;Iniciar o meu repositório&quot;</span></code></pre></div>
+<p><br />
+Podemos também adicionar ou remover ficheiros mais tarde.</p>
+</section><section id="modificar-ficheiros" class="slide level2">
+<h2>Modificar ficheiros</h2>
+<p>Depois de fazer alterações aos ficheiros na área de trabalho (e.g. usando um editor de texto):</p>
+<ol type="1">
+<li>adicionar novamente os ficheiros à àrea de estágio</li>
+<li>registar um <em>commit</em> com uma mensagem descritiva.</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">emacs</span>    <span class="co"># editar ficheiros </span>
+<span class="ex">...</span>
+<span class="fu">git</span> add ficheiro1 ficheiro2
+<span class="fu">git</span> commit -m <span class="op">&lt;</span>mensagem<span class="op">&gt;</span></code></pre></div>
+</section><section id="consultar-o-estado" class="slide level2">
+<h2>Consultar o estado</h2>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> status
+  <span class="co"># ver estado da área de trabalho e de estágio</span></code></pre></div>
+<dl>
+<dt><code>Changes to be commited</code></dt>
+<dd><p>ficheiros modificados <strong>que vão ser incluidos</strong> no próximo <em>commit</em></p>
+</dd>
+<dt><code>Changes not staged for commit</code></dt>
+<dd><p>ficheiros modificados mas <strong>não incluidos</strong> no próximo <em>commit</em></p>
+</dd>
+<dt><code>Untracked files</code></dt>
+<dd><p>ficheiros na área de trabalho que o <em>Git</em> não está a gerir</p>
+</dd>
+</dl>
+</section><section id="outras-consultas" class="slide level2">
+<h2>Outras consultas</h2>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> diff
+ <span class="co"># listar modificações desde o último *commit*</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> log
+  <span class="co"># Listar o histórico de *commits*</span></code></pre></div>
+<p><br />
+Estes comandos aceitam muitas opções extra; ver ajuda no manual:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> diff --help
+<span class="fu">git</span> log --help</code></pre></div>
+</section>
+<section id="sincronização-e-colaboração" class="titleslide slide level1"><h1>Sincronização e colaboração</h1></section><section id="repositórios-remotos" class="slide level2">
+<h2>Repositórios remotos</h2>
+<p>Em <em>Git</em> todos os repositórios têm a mesma estrutura e suportam os mesmos comandos.</p>
+<p><br />
+Um <em>repositório remoto</em> é apenas um diretório <em>Git</em> que está localizado noutro computador.</p>
+</section><section id="usar-um-repositório-remoto" class="slide level2">
+<h2>Usar um repositório remoto</h2>
+<p>Para copiar um repositório remoto já inicializado basta fazer <em>clone</em>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> clone URL-do-repositório-remoto</code></pre></div>
+<ul>
+<li>O URL de um servidor remoto é tipicamente <code>https://...</code> ou <code>ssh://...</code></li>
+<li>Obtemos uma cópia local completa do repositório que podemos consultar e modificar livremente</li>
+</ul>
+</section><section id="usar-um-repositório-remoto-cont." class="slide level2">
+<h2>Usar um repositório remoto (cont.)</h2>
+<p>Podemos fazer alterações à copia local dos ficheiros tal como anteriormente.</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">  <span class="co"># editar ficheiros localmente</span>
+<span class="ex">...</span>
+<span class="fu">git</span> add ficheiro1
+<span class="fu">git</span> add ficheiro2
+<span class="ex">...</span>
+<span class="fu">git</span> commit -m <span class="st">&quot;mensagem descritiva...&quot;</span></code></pre></div>
+<p>Após este comando, esta modificação foi registada <strong>apenas no repositório local</strong> --- ainda nada foi enviado ao servidor remoto!</p>
+</section><section id="enviar-modificações" class="slide level2">
+<h2>Enviar modificações</h2>
+<p>Para enviar os seus <em>commits</em> locais para o repositório remoto usamos o comando <em>push</em>.</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> push</code></pre></div>
+</section><section id="receber-modificações" class="slide level2">
+<h2>Receber modificações</h2>
+<p>Para receber alterações que outros tenham enviado ao repositório remoto usamos <em>pull</em>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> pull</code></pre></div>
+<p>Este comando descarrega <em>commits</em> no repositório remoto feitos desde a última vez aplica-os ao repositório local.</p>
+</section><section id="como-coordenar-com-colaboradores" class="slide level2">
+<h2>Como coordenar com colaboradores</h2>
+<p>Há várias formas de usar <em>Git</em> com repositórios remotos:</p>
+<ul>
+<li>com um <em>branch</em> único partilhado por todos os colaboradores --- semelhante ao uso num sistema centralizado</li>
+<li>com <em>branches</em> distintos para desenvolvimento separado</li>
+</ul>
+</section><section id="nesta-unidade-curricular" class="slide level2">
+<h2>Nesta unidade curricular</h2>
+<p>Sugerimos usar o <em>Git</em> de forma centralizada:</p>
+<ul>
+<li>com um repositório central num servidor <em>Gitlab</em>;</li>
+<li>serve como o <em>ponto de sincronismo</em> entre os colaboradores;</li>
+<li>com um único <em>branch</em> de desenvolvimento (<em>master</em>).</li>
+</ul>
+</section><section id="repositório-central" class="slide level2">
+<h2>Repositório central</h2>
+<ul>
+<li>Servidor <em>Gitlab</em>:<br />
+<a href="https://gitlab01.alunos.dcc.fc.up.pt" class="uri">https://gitlab01.alunos.dcc.fc.up.pt</a>.</li>
+<li>Interface <em>web</em> para projetos em <em>Git</em></li>
+<li>Semelhante ao <em>Github</em> mas mantido num servidor do DCC</li>
+<li>Cada aluno tem uma conta pessoal (<em>login/password</em> do LabCC)</li>
+<li><em>Grupos</em> de dois alunos para os trabalhos --- criados durante as aulas</li>
+</ul>
+</section><section id="conflitos" class="slide level2">
+<h2>Conflitos</h2>
+<p>Se um dos nossos <em>commits</em> modificar parte dum ficheiro que outro colaborador também editou, o <em>Git</em> vai sinalizar um <strong>conflito</strong>.</p>
+<p><br />
+O <em>Git</em> <strong>não resolve o conflito sozinho</strong>; o utilizador deve:</p>
+<ol type="1">
+<li>editar o(s) ficheiro(s) afetado(s) e juntar as modificações</li>
+<li>registar um novo <em>commit</em> de resolução</li>
+<li>enviar a resolução para o repositório remoto</li>
+</ol>
+</section><section id="exemplo" class="slide level2">
+<h2>Exemplo</h2>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> pull
+<span class="co"># CONFLICT (content): Merge conflict in file.txt</span></code></pre></div>
+<pre><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD:file.txt
+Hello world
+=======
+Goodbye
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; 77976da35a11db4... :file.txt</code></pre>
+<p><br />
+Entre <code>&lt;&lt;&lt;&lt;&lt;&lt;</code> e <code>=====</code> é a <strong>modificação local</strong>.</p>
+<p>Entre <code>======</code> e <code>&gt;&gt;&gt;&gt;&gt;&gt;</code> é a <strong>modificação remota</strong>.</p>
+</section><section id="resolver-o-conflito" class="slide level2">
+<h2>Resolver o conflito</h2>
+<p>Editamos <code>file.txt</code> e juntamos as modificações:</p>
+<pre><code>Hello world
+Goodbye</code></pre>
+<p><br />
+Registamos um novo <em>commit</em> de resolução:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> add file.txt
+<span class="fu">git</span> commit -m <span class="st">&quot;resolver conflito&quot;</span></code></pre></div>
+</section><section id="resolver-o-conflito-cont." class="slide level2">
+<h2>Resolver o conflito (cont.)</h2>
+<p>Por fim, fazemos o <code>push</code> da resolução para o repositório remoto.</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> push</code></pre></div>
+</section><section id="sumário" class="slide level2">
+<h2>Sumário</h2>
+<dl>
+<dt><code>clone</code></dt>
+<dd><p>copiar um repositório remoto</p>
+</dd>
+<dt><code>add</code></dt>
+<dd><p>adicionar ficheiros alterados à àrea de estágio</p>
+</dd>
+<dt><code>commit</code></dt>
+<dd><p>registar alterações no repositório local</p>
+</dd>
+<dt><code>push</code></dt>
+<dd><p>enviar alterações ao repositório remoto</p>
+</dd>
+<dt><code>pull</code></dt>
+<dd><p>pedir alterações do repositório remoto</p>
+</dd>
+</dl>
+</section>
+<section id="recomendações" class="titleslide slide level1"><h1>Recomendações</h1></section><section id="alguns-cuidados-a-ter" class="slide level2">
+<h2>Alguns cuidados a ter</h2>
+<ul>
+<li>Fazer bons <em>commits</em>:
+<ul>
+<li>use o <em>git add</em> para juntar apenas as alterações relacionadas</li>
+<li>escolha <em>boas mensagens</em>: o <strong>porquê</strong> do commit, não a quais os ficheiros (desnecessário!)</li>
+</ul></li>
+<li>Ter em atenção que, se alterarmos a história do repositório de forma descuidada, não estamos apenas a afectar-nos mas também aos nossos colegas de trabalho.</li>
+</ul>
+</section><section id="exemplos-de-más-mensagens" class="slide level2">
+<h2>Exemplos de más mensagens</h2>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> commit -m <span class="st">&quot;Últimas alterações.&quot;</span>
+<span class="fu">git</span> commit -m <span class="st">&quot;Alterações do Pedro.&quot;</span>
+<span class="fu">git</span> commit -m <span class="st">&quot;Adiciona o Jogador.java.&quot;</span>
+<span class="fu">git</span> commit -m <span class="st">&quot;Alterações no Jogador.java.&quot;</span>
+<span class="fu">git</span> commit -m <span class="st">&quot;Adiciona cenas.&quot;</span>
+<span class="fu">git</span> commit -m <span class="st">&quot;Revision&quot;</span>
+<span class="fu">git</span> commit -m <span class="st">&quot;Blablabla&quot;</span>
+<span class="fu">git</span> commit -m <span class="st">&quot;WTFWTFWTF&quot;</span></code></pre></div>
+</section><section id="exemplos-de-boas-mensagens" class="slide level2">
+<h2>Exemplos de boas mensagens</h2>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> commit -m <span class="st">&quot;Resolve o bug do prémio&quot;</span>
+<span class="fu">git</span> commit -m <span class="st">&quot;Remove duplicação de código&quot;</span>
+<span class="fu">git</span> commit -m <span class="st">&quot;Acrescenta contagem de pontuação&quot;</span></code></pre></div>
+</section>
+<section id="extras" class="titleslide slide level1"><h1>Extras</h1></section><section id="mudar-nomes" class="slide level2">
+<h2>Mudar nomes</h2>
+<p>P: Como fazer para mudar o nome de um ficheiro ou diretório que foi registado no <em>Git</em>?</p>
+<p><br />
+R: Usamos <code>git mv</code> para mudar o nome de um ficheiro preservando a história de alterações.</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> mv nome-atual nome-novo</code></pre></div>
+</section><section id="desfazer-modificações" class="slide level2">
+<h2>Desfazer modificações</h2>
+<p>P: Editei um ficheiro na área de trabalho, mas agora quero desfazer essas alterações.</p>
+<p> </p>
+<p>R: Usamos <code>git checkout</code> para reverter modificações de volta para o estado registado no último <em>commit</em>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> checkout -- nome-do-ficheiro</code></pre></div>
+</section><section id="desfazer-stagging" class="slide level2">
+<h2>Desfazer <em>stagging</em></h2>
+<p>P: Adicionei um ficheiro à área de estágio, mas afinal não quero incluí-lo no próximo <em>commit</em>.</p>
+<p><br />
+R: Usamos <code>git reset HEAD</code> para remover um ficheiro da área de estágio:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> reset HEAD nome-do-ficheiro</code></pre></div>
+</section><section id="referências" class="slide level2">
+<h2>Referências</h2>
+<ul>
+<li><a href="http://git-scm.com/book/en/v2">Git Community Book</a></li>
+<li><a href="http://progit.org/">Pro Git</a></li>
+<li><a href="http://gitref.org/">Git Reference</a></li>
+<li><a href="http://github.com/">Github</a></li>
+<li><a href="https://www.atlassian.com/git/tutorials/">Atlassian git tutorial</a></li>
+<li><a href="http://gitimmersion.com/">Git immersion</a></li>
+</ul>
+</section><section id="guis-para-git" class="slide level2">
+<h2>GUIs para <em>Git</em></h2>
+<ul>
+<li><a href="http://www.sourcetreeapp.com">Sourcetree</a> (MacOS, Windows)</li>
+<li><a href="http://live.gnome.org/giggle">Giggle</a> (Linux)</li>
+</ul>
+</section><section id="section" class="slide level2">
+<h2></h2>
+<p align="center">
+<img src="images/git.png" alt="git_commit" /><br />
+
+</p>
+</section>
+<!-- {{{{ dzslides core
+#
+#
+#     __  __  __       .  __   ___  __
+#    |  \  / /__` |    | |  \ |__  /__`
+#    |__/ /_ .__/ |___ | |__/ |___ .__/ core :€
+#
+#
+# The following block of code is not supposed to be edited.
+# But if you want to change the behavior of these slides,
+# feel free to hack it!
+#
+-->
+
+<div id="progress-bar"></div>
+
+<!-- Default Style -->
+<style>
+  * { margin: 0; padding: 0; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+  [role="note"] { display: none; }
+  body {
+    width: 800px; height: 600px;
+    margin-left: -400px; margin-top: -300px;
+    position: absolute; top: 50%; left: 50%;
+    overflow: hidden;
+    display: none;
+  }
+  .view body {
+    position: static;
+    margin: 0; padding: 0;
+    width: 100%; height: 100%;
+    display: inline-block;
+    overflow: visible; overflow-x: hidden;
+    /* undo Dz.onresize */
+    transform: none !important;
+    -moz-transform: none !important;
+    -webkit-transform: none !important;
+    -o-transform: none !important;
+    -ms-transform: none !important;
+  }
+  .view head, .view head > title { display: block }
+  section {
+    position: absolute;
+    pointer-events: none;
+    width: 100%; height: 100%;
+  }
+  .view section {
+    pointer-events: auto;
+    position: static;
+    width: 800px; height: 600px;
+    margin: -150px -200px;
+    float: left;
+
+    transform: scale(.4);
+    -moz-transform: scale(.4);
+    -webkit-transform: scale(.4);
+    -o-transform: scale(.4);
+    -ms-transform: scale(.4);
+  }
+  .view section > * { pointer-events: none; }
+  section[aria-selected] { pointer-events: auto; }
+  html { overflow: hidden; }
+  html.view { overflow: visible; }
+  body.loaded { display: block; }
+  .incremental {visibility: hidden; }
+  .incremental[active] {visibility: visible; }
+  #progress-bar{
+    bottom: 0;
+    position: absolute;
+    -moz-transition: width 400ms linear 0s;
+    -webkit-transition: width 400ms linear 0s;
+    -ms-transition: width 400ms linear 0s;
+    transition: width 400ms linear 0s;
+  }
+  .view #progress-bar {
+    display: none;
+  }
+</style>
+
+<script>
+  var Dz = {
+    remoteWindows: [],
+    idx: -1,
+    step: 0,
+    html: null,
+    slides: null,
+    progressBar : null,
+    params: {
+      autoplay: "1"
+    }
+  };
+
+  Dz.init = function() {
+    document.body.className = "loaded";
+    this.slides = Array.prototype.slice.call($$("body > section"));
+    this.progressBar = $("#progress-bar");
+    this.html = document.body.parentNode;
+    this.setupParams();
+    this.onhashchange();
+    this.setupTouchEvents();
+    this.onresize();
+    this.setupView();
+  }
+
+  Dz.setupParams = function() {
+    var p = window.location.search.substr(1).split('&');
+    p.forEach(function(e, i, a) {
+      var keyVal = e.split('=');
+      Dz.params[keyVal[0]] = decodeURIComponent(keyVal[1]);
+    });
+  // Specific params handling
+    if (!+this.params.autoplay)
+      $$.forEach($$("video"), function(v){ v.controls = true });
+  }
+
+  Dz.onkeydown = function(aEvent) {
+    // Don't intercept keyboard shortcuts
+    if (aEvent.altKey
+      || aEvent.ctrlKey
+      || aEvent.metaKey
+      || aEvent.shiftKey) {
+      return;
+    }
+    if ( aEvent.keyCode == 37 // left arrow
+      || aEvent.keyCode == 38 // up arrow
+      || aEvent.keyCode == 33 // page up
+    ) {
+      aEvent.preventDefault();
+      this.back();
+    }
+    if ( aEvent.keyCode == 39 // right arrow
+      || aEvent.keyCode == 40 // down arrow
+      || aEvent.keyCode == 34 // page down
+    ) {
+      aEvent.preventDefault();
+      this.forward();
+    }
+    if (aEvent.keyCode == 35) { // end
+      aEvent.preventDefault();
+      this.goEnd();
+    }
+    if (aEvent.keyCode == 36) { // home
+      aEvent.preventDefault();
+      this.goStart();
+    }
+    if (aEvent.keyCode == 32) { // space
+      aEvent.preventDefault();
+      this.toggleContent();
+    }
+    if (aEvent.keyCode == 70) { // f
+      aEvent.preventDefault();
+      this.goFullscreen();
+    }
+    if (aEvent.keyCode == 79) { // o
+      aEvent.preventDefault();
+      this.toggleView();
+    }
+  }
+
+  /* Touch Events */
+
+  Dz.setupTouchEvents = function() {
+    var orgX, newX;
+    var tracking = false;
+
+    var db = document.body;
+    db.addEventListener("touchstart", start.bind(this), false);
+    db.addEventListener("touchmove", move.bind(this), false);
+
+    function start(aEvent) {
+      aEvent.preventDefault();
+      tracking = true;
+      orgX = aEvent.changedTouches[0].pageX;
+    }
+
+    function move(aEvent) {
+      if (!tracking) return;
+      newX = aEvent.changedTouches[0].pageX;
+      if (orgX - newX > 100) {
+        tracking = false;
+        this.forward();
+      } else {
+        if (orgX - newX < -100) {
+          tracking = false;
+          this.back();
+        }
+      }
+    }
+  }
+
+  Dz.setupView = function() {
+    document.body.addEventListener("click", function ( e ) {
+      if (!Dz.html.classList.contains("view")) return;
+      if (!e.target || e.target.nodeName != "SECTION") return;
+
+      Dz.html.classList.remove("view");
+      Dz.setCursor(Dz.slides.indexOf(e.target) + 1);
+    }, false);
+  }
+
+  /* Adapt the size of the slides to the window */
+
+  Dz.onresize = function() {
+    var db = document.body;
+    var sx = db.clientWidth / window.innerWidth;
+    var sy = db.clientHeight / window.innerHeight;
+    var transform = "scale(" + (1/Math.max(sx, sy)) + ")";
+
+    db.style.MozTransform = transform;
+    db.style.WebkitTransform = transform;
+    db.style.OTransform = transform;
+    db.style.msTransform = transform;
+    db.style.transform = transform;
+  }
+
+
+  Dz.getNotes = function(aIdx) {
+    var s = $("section:nth-of-type(" + aIdx + ")");
+    var d = s.$("[role='note']");
+    return d ? d.innerHTML : "";
+  }
+
+  Dz.onmessage = function(aEvent) {
+    var argv = aEvent.data.split(" "), argc = argv.length;
+    argv.forEach(function(e, i, a) { a[i] = decodeURIComponent(e) });
+    var win = aEvent.source;
+    if (argv[0] === "REGISTER" && argc === 1) {
+      this.remoteWindows.push(win);
+      this.postMsg(win, "REGISTERED", document.title, this.slides.length);
+      this.postMsg(win, "CURSOR", this.idx + "." + this.step);
+      return;
+    }
+    if (argv[0] === "BACK" && argc === 1)
+      this.back();
+    if (argv[0] === "FORWARD" && argc === 1)
+      this.forward();
+    if (argv[0] === "START" && argc === 1)
+      this.goStart();
+    if (argv[0] === "END" && argc === 1)
+      this.goEnd();
+    if (argv[0] === "TOGGLE_CONTENT" && argc === 1)
+      this.toggleContent();
+    if (argv[0] === "SET_CURSOR" && argc === 2)
+      window.location.hash = "#" + argv[1];
+    if (argv[0] === "GET_CURSOR" && argc === 1)
+      this.postMsg(win, "CURSOR", this.idx + "." + this.step);
+    if (argv[0] === "GET_NOTES" && argc === 1)
+      this.postMsg(win, "NOTES", this.getNotes(this.idx));
+  }
+
+  Dz.toggleContent = function() {
+    // If a Video is present in this new slide, play it.
+    // If a Video is present in the previous slide, stop it.
+    var s = $("section[aria-selected]");
+    if (s) {
+      var video = s.$("video");
+      if (video) {
+        if (video.ended || video.paused) {
+          video.play();
+        } else {
+          video.pause();
+        }
+      }
+    }
+  }
+
+  Dz.setCursor = function(aIdx, aStep) {
+    // If the user change the slide number in the URL bar, jump
+    // to this slide.
+    aStep = (aStep != 0 && typeof aStep !== "undefined") ? "." + aStep : ".0";
+    window.location.hash = "#" + aIdx + aStep;
+  }
+
+  Dz.onhashchange = function() {
+    var cursor = window.location.hash.split("#"),
+        newidx = 1,
+        newstep = 0;
+    if (cursor.length == 2) {
+      newidx = ~~cursor[1].split(".")[0];
+      newstep = ~~cursor[1].split(".")[1];
+      if (newstep > Dz.slides[newidx - 1].$$('.incremental > *').length) {
+        newstep = 0;
+        newidx++;
+      }
+    }
+    this.setProgress(newidx, newstep);
+    if (newidx != this.idx) {
+      this.setSlide(newidx);
+    }
+    if (newstep != this.step) {
+      this.setIncremental(newstep);
+    }
+    for (var i = 0; i < this.remoteWindows.length; i++) {
+      this.postMsg(this.remoteWindows[i], "CURSOR", this.idx + "." + this.step);
+    }
+  }
+
+  Dz.back = function() {
+    if (this.idx == 1 && this.step == 0) {
+      return;
+    }
+    if (this.step == 0) {
+      this.setCursor(this.idx - 1,
+                     this.slides[this.idx - 2].$$('.incremental > *').length);
+    } else {
+      this.setCursor(this.idx, this.step - 1);
+    }
+  }
+
+  Dz.forward = function() {
+    if (this.idx >= this.slides.length &&
+        this.step >= this.slides[this.idx - 1].$$('.incremental > *').length) {
+        return;
+    }
+    if (this.step >= this.slides[this.idx - 1].$$('.incremental > *').length) {
+      this.setCursor(this.idx + 1, 0);
+    } else {
+      this.setCursor(this.idx, this.step + 1);
+    }
+  }
+
+  Dz.goStart = function() {
+    this.setCursor(1, 0);
+  }
+
+  Dz.goEnd = function() {
+    var lastIdx = this.slides.length;
+    var lastStep = this.slides[lastIdx - 1].$$('.incremental > *').length;
+    this.setCursor(lastIdx, lastStep);
+  }
+
+  Dz.toggleView = function() {
+    this.html.classList.toggle("view");
+
+    if (this.html.classList.contains("view")) {
+      $("section[aria-selected]").scrollIntoView(true);
+    }
+  }
+
+  Dz.setSlide = function(aIdx) {
+    this.idx = aIdx;
+    var old = $("section[aria-selected]");
+    var next = $("section:nth-of-type("+ this.idx +")");
+    if (old) {
+      old.removeAttribute("aria-selected");
+      var video = old.$("video");
+      if (video) {
+        video.pause();
+      }
+    }
+    if (next) {
+      next.setAttribute("aria-selected", "true");
+      if (this.html.classList.contains("view")) {
+        next.scrollIntoView();
+      }
+      var video = next.$("video");
+      if (video && !!+this.params.autoplay) {
+        video.play();
+      }
+    } else {
+      // That should not happen
+      this.idx = -1;
+      // console.warn("Slide doesn't exist.");
+    }
+  }
+
+  Dz.setIncremental = function(aStep) {
+    this.step = aStep;
+    var old = this.slides[this.idx - 1].$('.incremental > *[aria-selected]');
+    if (old) {
+      old.removeAttribute('aria-selected');
+    }
+    var incrementals = $$('.incremental');
+    if (this.step <= 0) {
+      $$.forEach(incrementals, function(aNode) {
+        aNode.removeAttribute('active');
+      });
+      return;
+    }
+    var next = this.slides[this.idx - 1].$$('.incremental > *')[this.step - 1];
+    if (next) {
+      next.setAttribute('aria-selected', true);
+      next.parentNode.setAttribute('active', true);
+      var found = false;
+      $$.forEach(incrementals, function(aNode) {
+        if (aNode != next.parentNode)
+          if (found)
+            aNode.removeAttribute('active');
+          else
+            aNode.setAttribute('active', true);
+        else
+          found = true;
+      });
+    } else {
+      setCursor(this.idx, 0);
+    }
+    return next;
+  }
+
+  Dz.goFullscreen = function() {
+    var html = $('html'),
+        requestFullscreen = html.requestFullscreen || html.requestFullScreen || html.mozRequestFullScreen || html.webkitRequestFullScreen;
+    if (requestFullscreen) {
+      requestFullscreen.apply(html);
+    }
+  }
+  
+  Dz.setProgress = function(aIdx, aStep) {
+    var slide = $("section:nth-of-type("+ aIdx +")");
+    if (!slide)
+      return;
+    var steps = slide.$$('.incremental > *').length + 1,
+        slideSize = 100 / (this.slides.length - 1),
+        stepSize = slideSize / steps;
+    this.progressBar.style.width = ((aIdx - 1) * slideSize + aStep * stepSize) + '%';
+  }
+  
+  Dz.postMsg = function(aWin, aMsg) { // [arg0, [arg1...]]
+    aMsg = [aMsg];
+    for (var i = 2; i < arguments.length; i++)
+      aMsg.push(encodeURIComponent(arguments[i]));
+    aWin.postMessage(aMsg.join(" "), "*");
+  }
+  
+  function init() {
+    Dz.init();
+    window.onkeydown = Dz.onkeydown.bind(Dz);
+    window.onresize = Dz.onresize.bind(Dz);
+    window.onhashchange = Dz.onhashchange.bind(Dz);
+    window.onmessage = Dz.onmessage.bind(Dz);
+  }
+
+  window.onload = init;
+</script>
+
+
+<script> // Helpers
+  if (!Function.prototype.bind) {
+    Function.prototype.bind = function (oThis) {
+
+      // closest thing possible to the ECMAScript 5 internal IsCallable
+      // function 
+      if (typeof this !== "function")
+      throw new TypeError(
+        "Function.prototype.bind - what is trying to be fBound is not callable"
+      );
+
+      var aArgs = Array.prototype.slice.call(arguments, 1),
+          fToBind = this,
+          fNOP = function () {},
+          fBound = function () {
+            return fToBind.apply( this instanceof fNOP ? this : oThis || window,
+                   aArgs.concat(Array.prototype.slice.call(arguments)));
+          };
+
+      fNOP.prototype = this.prototype;
+      fBound.prototype = new fNOP();
+
+      return fBound;
+    };
+  }
+
+  var $ = (HTMLElement.prototype.$ = function(aQuery) {
+    return this.querySelector(aQuery);
+  }).bind(document);
+
+  var $$ = (HTMLElement.prototype.$$ = function(aQuery) {
+    return this.querySelectorAll(aQuery);
+  }).bind(document);
+
+  $$.forEach = function(nodeList, fun) {
+    Array.prototype.forEach.call(nodeList, fun);
+  }
+
+</script>
+<!-- vim: set fdm=marker: }}} -->
+</body>
+</html>
