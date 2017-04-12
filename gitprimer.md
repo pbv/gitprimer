@@ -118,8 +118,8 @@ Desvantagens:
 
 ## O que é o *Git*?
 
-* Um sistema de controlo de versões distribuído desenvolvido desde 2005
-* Concebido para gestão do código do *kernel* Linux
+* Um sistema de controlo de versões distribuído 
+* Desenvolvido desde 2005 para gestão do código do *kernel* Linux
 * Muito usado em projetos *open-source*
 * Características:
 	* conceção simples mas poderosa
@@ -130,44 +130,59 @@ Desvantagens:
 	* completamente distribuído
 
 
-## O *Git* dá-te super-poderes!
+## Porquê usar?
 
-Utilizar *Git* é um método de trabalho valioso:
-
-* Garantimos a **integridade** dos ficheiros \
-  (diga adeus às *pen-drives* para transportar ficheiros entre
-  casa e trabalho)
-* Usando um repositório remoto, **temos sempre um *backup*** caso algo
-  corra mal
-* Permite **experimentar e explorar** sem termos medo das
-  consequências (dá sempre para voltar atrás caso seja
-  necessário)
-* As mensagens de *commits* permitem-nos rever os **motivos das alterações**
+* Sincronização entre computador pessoal e da universidade
+      - diga adeus às *pen drives*
+* Permite experimentar modificações sem medo 
+      - podemos reverter facilmente se necessário
+* Repositório remotos funcionam com *backup* 
+* As mensagens de *commits* são um registo histórico do trabalho 
+* Não apenas para código:
+       - documentação, relatórios, dissertações
 
 
 ## Como funciona
 
+* Usamos o comando `git` para a gestão de repositórios
 * Cada repositório mantém um conjunto de ficheiros e diretórios (um
   mini-sistema de ficheiros)
 * Podem mudar ao longo do tempo:
-    - acrescentar/remover ficheiros
-	- editar o conteúdo
-* Quando o utilizador regista uma modificação (*commit*):
-     - guarda o estado atual de *todos* os ficheiros marcados (*snapshot*)
-	 - para os ficheiros não modificados:
-	   guarda apenas uma referência para o estado anterior
-* Um repositório *Git* é uma sequência destes "*snapshots*"
+    - acrescentar/editar/remover ficheiros
+* Quando o utilizador regista uma modificação local (*commit*):
+     - guarda uma "fotografia" do estado atual dos ficheiros marcados
+	   (*snapshot*)
+
+
+## Repositórios Locais e Remotos
+
+* Podemos usar *Git* apenas para gerir um repositório local
+* Mas o *Git* permite também *sincronizar modificações*
+  de/para repositórios remotos
+* Um repositório remoto é apenas um repositório *Git* num outro computador
+  na internet...
+* Contudo existem serviços especializados em  *hosting* de repositórios:
+    - GitHub   [https://github.com/](https://github.com/)
+    - GitLab   [https://gitlab.com/](https://gitlab.com/)
+    - Ambos permitem contas gratuitas (sujeitas a condições de uso)
 
 
 ## Fluxo de trabalho básico
 
-Três fases:
 
-1.  **Modify**: modificar os ficheiros no directório de trabalho.
-2.  **Stage**: adicionar *snapshots* dos ficheiros à "área de estágio"
-    (*staging area*).
-3.  **Commit**: registar esse *snapshots* na base de dados do *Git*
-    juntamente com uma *mensagem* de arquivo.
+**Modify**
+
+:     modificar os ficheiros no directório de trabalho
+
+**Stage**
+
+:     adicionar *snapshots* dos ficheiros à área de estágio
+    (*staging area*)
+	
+**Commit**
+
+:     registar um *snapshot* juntamente com uma mensagem
+descritiva
 
 
 ## Operações básicas
@@ -178,8 +193,8 @@ Três fases:
 
 ## *Commit*
 
-* Uma "imagem" dos ficheiros tal como estavam quando estagiados
-* Uma **mensagem de arquivo** que descreve a alteração efetuada
+* Uma *imagem* do estado atual dos ficheiros
+* Uma *mensagem* descritiva da alteração efetuada
 * Meta-informação do autor e data
 
 <p align="center">
@@ -193,49 +208,23 @@ quisermos.
 ## Ciclo de Vida
 
 Os ficheiros no directório de trabalho podem estar em quatro estados
-diferentes em relação ao *commit* atual.
+diferentes em relação à copia local doo repositório.
 
 <p align="center">
 ![image](images/file-status-lifecycle.png)
 </p>
 
 
-<!--
-# Git Básico - Repositórios remotos
-
-Os comandos básicos para trabalhar com repositório remoto são
-
--   *clone*: “clonar” um repositório remoto (faz uma cópia local
-    completa).
--   *pull*: obter alterações de um repositório remoto.
--   *push*: enviar alterações para um repositório remoto.
-
-Vamos ver alguns exemplos.
-
-
-# Git Básico - Vantagens
-
-Vantagens de usar Git:
-
--   Quase todas as operações são locais.
--   “*Snapshots*” registados (*committed*) são sempre mantidos.
--   Forte suporte para desenvolvimento não-linear.
-
--->
-
-
 # Utilização do *Git* 
 
 ## Configuração inicial 
 
-Antes de usar *Git* pela primeira vez:
+#### Escolher o nome e e-email
 
-#### Escolher a sua identidade
-
-```bash
-git config --global user.name "John Doe"
-git config --global user.email john@doe.com
-```
+~~~bash
+git config --global user.name "Pedro..."
+git config --global user.email pbv@dcc.fc.up.pt
+~~~
 
 
 #### Mais configurações (opcionais)
@@ -254,15 +243,15 @@ git help
 ## Inicializar um repositório local
 
 ```bash
-mkdir my_repo
-cd my_repo
+mkdir my_project
+cd my_project
 git init
 ```
 
-* inicializa um diretório `my_repo/.git`
-  que vai conter a base de dados do repositório
-* o repositório começa *vazio*: temos de
-  adicionar ficheiros e/ou diretórios
+* inicializa um diretório `my_project/.git`
+  que vai conter a base de dados do *Git*
+* o repositório é inicializado *vazio*
+* devemos adicionar ficheiros e/ou diretórios
 
 ## Adicionar ficheiros
 
@@ -270,10 +259,9 @@ git init
 git add ficheiro1
 git add ficheiro2 
 ```
-
 \
 
-Podemos também adicionar vários ficheiros de uma só vez:
+Vários ficheiros de uma só vez:
 
 ```bash
 git add ficheiro1 ficheiro2 
@@ -287,19 +275,19 @@ Os ficheiros ficam na *área de estágio* --- temos de fazer um
 ## Primeiro *Commit*
 
 ```bash
-git commit -m "Iniciar o meu repositório"
+git commit -m "Inicialização do repositório"
 ```
-
 \
 
-Podemos também adicionar ou remover ficheiros mais tarde.
+NB: podemos adicionar mais ficheiros posteriormente.
+
 
 ##  Modificar ficheiros
 
-Depois de fazer alterações aos ficheiros na área de trabalho
-(e.g. usando um editor de texto):
+Depois de modificar algum(s) dos ficheiros 
+(e.g.\ usando um editor de texto) devemos:
 
-1. adicionar novamente os ficheiros à àrea de estágio
+1. adicionar os ficheiros modificados à àrea de estágio
 2. registar um *commit* com uma mensagem descritiva.
 
 ```bash
@@ -319,11 +307,11 @@ git status
 
 `Changes to be commited`
 
-:     ficheiros modificados **que vão ser incluidos** no próximo *commit*
+:     ficheiros modificados **que serão incluidos** no próximo *commit*
 
 `Changes not staged for commit`
 
-:     ficheiros modificados mas **não incluidos** no próximo *commit*
+:     ficheiros modificados mas ainda **não incluidos** no próximo *commit*
 
 `Untracked files`
 
@@ -335,12 +323,12 @@ git status
 
 ```bash
 git diff
- # listar modificações desde o último *commit*
+ # listar modificações desde o último commit
 ```
 
 ```bash
 git log
-  # Listar o histórico de *commits*
+  # Listar o histórico de commits
 ```
 \
 
@@ -397,9 +385,11 @@ git add ficheiro2
 git commit -m "mensagem descritiva..."
 ```
 
-Após este comando, esta modificação foi
-registada **apenas no repositório local**
---- ainda nada foi enviado ao servidor remoto!
+\
+
+Esta modificação foi
+**registada apenas no repositório local**
+--- nada foi enviado ao servidor remoto!
 
 
 ## Enviar modificações 
@@ -424,27 +414,19 @@ Este comando descarrega *commits* no repositório remoto feitos desde a
 última vez aplica-os ao repositório local.
 
 
-
 ## Como coordenar com colaboradores
 
-Há várias formas de usar *Git* com repositórios remotos:
+Sugestão para principiantes: 
 
-* com um *branch* único partilhado por todos os colaboradores ---
-  semelhante ao uso num sistema centralizado
-* com *branches* distintos para desenvolvimento separado
-
-
-
-## Nesta unidade curricular
-
-Sugerimos usar o *Git* de forma centralizada:
-
-* com um repositório central num servidor *Gitlab*;
-* serve como o *ponto de sincronismo* entre os colaboradores;
-* com um único *branch* de desenvolvimento (*master*).
+* crie um repositório no servidor *GitHub/GitLab*
+* com um único *branch* de desenvolvimento (*master*)
+* serve como o *ponto de sincronismo* entre os colaboradores
+* quando estiver mais familiarizado, pode introduzir *branches*
+  distintos para desenvolvimento seperado
 
 
 
+<!--
 ## Repositório central
 
 * Servidor *Gitlab*: \
@@ -453,7 +435,7 @@ Sugerimos usar o *Git* de forma centralizada:
 * Semelhante ao *Github* mas mantido num servidor do DCC
 * Cada aluno tem uma conta pessoal (*login/password* do LabCC)
 * *Grupos* de dois alunos para os trabalhos --- criados durante as aulas 
-
+-->
 
 ## Conflitos
 
@@ -463,11 +445,15 @@ o *Git* vai sinalizar um **conflito**.
 
 \
 
-O *Git* **não resolve o conflito sozinho**; o utilizador
-deve:
+O conflito é detetado apenas quando tentarmos sincronizar com
+um repositório remoto (`pull` ou `push`).
 
-1. editar o(s) ficheiro(s) afetado(s)
-   e juntar as modificações
+## Resolver Conflitos
+
+* O *Git* **não resolve o conflito sozinho**
+* O utilizador que provoca o conflito deve:
+
+1. editar os ficheiros afetados e juntar as alterções
 2. registar um novo *commit* de resolução
 3. enviar a resolução para o repositório remoto
 
