@@ -136,39 +136,76 @@ Desvantagens:
       - diga adeus às *pen drives*
 * Permite experimentar modificações sem medo 
       - podemos reverter facilmente se necessário
-* Repositório remotos funcionam com *backup* 
-* As mensagens de *commits* são um registo histórico do trabalho 
-* Não apenas para código:
-       - documentação, relatórios, dissertações
+* Repositórios remotos funcionam como *backup* 
+* As mensagens de *commits* são um registo histórico do
+  desenvolvimento
+* Não apenas para código: documentação, relatórios, dissertações
 
 
 ## Como funciona
 
-* Usamos o comando `git` para a gestão de repositórios
-* Cada repositório mantém um conjunto de ficheiros e diretórios (um
-  mini-sistema de ficheiros)
-* Podem mudar ao longo do tempo:
-    - acrescentar/editar/remover ficheiros
-* Quando o utilizador regista uma modificação local (*commit*):
-     - guarda uma "fotografia" do estado atual dos ficheiros marcados
-	   (*snapshot*)
+* Cada repositório consiste
+  de um conjunto de ficheiros e sub-diretórios
+* Quando registamos uma modificação (*commit*),
+  o *Git* guarda um *snapshot* de *todos* os ficheiros.
+  <p align="center">
+  <img src="images/snapshots.png" width=600/>
+  </p>
+  NB: ficheiros inalterados são guardados como uma *referência*
+  para a versão anterior.
+
+
+## Integridade 
+
+* O *Git* associa a cada objeto guardado
+  um  *hash* criptográfico (40 carateres hexadecimais); e.g.:
+
+~~~
+  24b9da6552252987aa493b52f8696cd6d3b00373
+~~~
+
+* Garante que o conteúdo dos ficheiros não foi corrompido
+* Serve também para identificar cada *commit* 
+
+<p align="center">
+![image](images/commit-hashes.png)
+</p>
+
+
 
 
 ## Repositórios Locais e Remotos
 
-* Podemos usar *Git* apenas para gerir um repositório local
-* Mas o *Git* permite também *sincronizar modificações*
+* Quase todas as operações com *Git* são **locais**:
+       - inicializar repositórios
+	   - acrescentar/remover ficheiros
+	   - registar modificações (*commit*)
+	   - listar a história
+	   - ...
+* Mas o *Git* permite também *sincronizar*
   de/para repositórios remotos
-* Um repositório remoto é apenas um repositório *Git* num outro computador
-  na internet...
-* Contudo existem serviços especializados em  *hosting* de repositórios:
-    - GitHub   [https://github.com/](https://github.com/)
-    - GitLab   [https://gitlab.com/](https://gitlab.com/)
-    - Ambos permitem contas gratuitas (sujeitas a condições de uso)
+* Um repositório remoto é apenas um diretório *Git* 
+  noutro computador na rede!
 
 
+## *Hosting* de Repositórios
+
+GitHub
+
+:      [https://github.com/](https://github.com/)
+
+GitLab
+
+:      [https://gitlab.com/](https://gitlab.com/)
+
+\
+
+Necessitam de registo, mas
+permitem criar contas gratuitas (sujeitas a condições de uso).
+
+
+<!--
 ## Fluxo de trabalho básico
-
 
 **Modify**
 
@@ -191,18 +228,8 @@ descritiva
 ![image](images/the-three-states.png)
 </p>
 
-## *Commit*
+-->
 
-* Uma *imagem* do estado atual dos ficheiros
-* Uma *mensagem* descritiva da alteração efetuada
-* Meta-informação do autor e data
-
-<p align="center">
-![image](images/commit-repository-data.png)
-</p>
-
-Qualquer *commit* pode ser inspecionado e recuperado se assim
-quisermos.
 
 
 ## Ciclo de Vida
@@ -636,5 +663,5 @@ git reset HEAD nome-do-ficheiro
 ## 
 
 <p align="center">
-![git_commit](images/git.png)\
+<img src="images/in-case-of-fire.png" width=600/>
 </p>

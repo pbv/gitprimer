@@ -157,69 +157,84 @@ Exemplos: <em>GNU arch</em>, <em>Darcs</em>, <em>Mercurial</em>, <em>Git</em>.</
 <ul>
 <li>podemos reverter facilmente se necessário</li>
 </ul></li>
-<li>Repositório remotos funcionam com <em>backup</em></li>
-<li>As mensagens de <em>commits</em> são um registo histórico do trabalho</li>
-<li>Não apenas para código:
-<ul>
-<li>documentação, relatórios, dissertações</li>
-</ul></li>
+<li>Repositórios remotos funcionam como <em>backup</em></li>
+<li>As mensagens de <em>commits</em> são um registo histórico do desenvolvimento</li>
+<li>Não apenas para código: documentação, relatórios, dissertações</li>
 </ul>
 </section><section id="como-funciona" class="slide level2">
 <h2>Como funciona</h2>
 <ul>
-<li>Usamos o comando <code>git</code> para a gestão de repositórios</li>
-<li>Cada repositório mantém um conjunto de ficheiros e diretórios (um mini-sistema de ficheiros)</li>
-<li>Podem mudar ao longo do tempo:
-<ul>
-<li>acrescentar/editar/remover ficheiros</li>
-</ul></li>
-<li>Quando o utilizador regista uma modificação local (<em>commit</em>):
-<ul>
-<li>guarda uma &quot;fotografia&quot; do estado atual dos ficheiros marcados (<em>snapshot</em>)</li>
-</ul></li>
+<li>Cada repositório consiste de um conjunto de ficheiros e sub-diretórios</li>
+<li>Quando registamos uma modificação (<em>commit</em>), o <em>Git</em> guarda um <em>snapshot</em> de <em>todos</em> os ficheiros.
+<p align="center">
+<img src="images/snapshots.png" width=600/>
+</p>
+NB: ficheiros inalterados são guardados como uma <em>referência</em> para a versão anterior.</li>
 </ul>
+</section><section id="integridade" class="slide level2">
+<h2>Integridade</h2>
+<ul>
+<li>O <em>Git</em> associa a cada objeto guardado um <em>hash</em> criptográfico (40 carateres hexadecimais); e.g.:</li>
+</ul>
+<pre><code>  24b9da6552252987aa493b52f8696cd6d3b00373</code></pre>
+<ul>
+<li>Garante que o conteúdo dos ficheiros não foi corrompido</li>
+<li>Serve também para identificar cada <em>commit</em></li>
+</ul>
+<p align="center">
+<img src="images/commit-hashes.png" alt="image" />
+</p>
 </section><section id="repositórios-locais-e-remotos" class="slide level2">
 <h2>Repositórios Locais e Remotos</h2>
 <ul>
-<li>Podemos usar <em>Git</em> apenas para gerir um repositório local</li>
-<li>Mas o <em>Git</em> permite também <em>sincronizar modificações</em> de/para repositórios remotos</li>
-<li>Um repositório remoto é apenas um repositório <em>Git</em> num outro computador na internet...</li>
-<li>Contudo existem serviços especializados em <em>hosting</em> de repositórios:
+<li>Quase todas as operações com <em>Git</em> são <strong>locais</strong>:
 <ul>
-<li>GitHub <a href="https://github.com/" class="uri">https://github.com/</a></li>
-<li>GitLab <a href="https://gitlab.com/" class="uri">https://gitlab.com/</a></li>
-<li>Ambos permitem contas gratuitas (sujeitas a condições de uso)</li>
+<li>inicializar repositórios</li>
+<li>acrescentar/remover ficheiros</li>
+<li>registar modificações (<em>commit</em>)</li>
+<li>listar a história</li>
+<li>...</li>
 </ul></li>
+<li>Mas o <em>Git</em> permite também <em>sincronizar</em> de/para repositórios remotos</li>
+<li>Um repositório remoto é apenas um diretório <em>Git</em> noutro computador na rede!</li>
 </ul>
-</section><section id="fluxo-de-trabalho-básico" class="slide level2">
-<h2>Fluxo de trabalho básico</h2>
+</section><section id="hosting-de-repositórios" class="slide level2">
+<h2><em>Hosting</em> de Repositórios</h2>
 <dl>
-<dt><strong>Modify</strong></dt>
-<dd><p>modificar os ficheiros no directório de trabalho</p>
+<dt>GitHub</dt>
+<dd><p><a href="https://github.com/" class="uri">https://github.com/</a></p>
 </dd>
-<dt><strong>Stage</strong></dt>
-<dd><p>adicionar <em>snapshots</em> dos ficheiros à área de estágio (<em>staging area</em>)</p>
-</dd>
-<dt><strong>Commit</strong></dt>
-<dd><p>registar um <em>snapshot</em> juntamente com uma mensagem descritiva</p>
+<dt>GitLab</dt>
+<dd><p><a href="https://gitlab.com/" class="uri">https://gitlab.com/</a></p>
 </dd>
 </dl>
-</section><section id="operações-básicas" class="slide level2">
-<h2>Operações básicas</h2>
+<p><br />
+Necessitam de registo, mas permitem criar contas gratuitas (sujeitas a condições de uso).</p>
+<!--
+## Fluxo de trabalho básico
+
+**Modify**
+
+:     modificar os ficheiros no directório de trabalho
+
+**Stage**
+
+:     adicionar *snapshots* dos ficheiros à área de estágio
+    (*staging area*)
+    
+**Commit**
+
+:     registar um *snapshot* juntamente com uma mensagem
+descritiva
+
+
+## Operações básicas
+
 <p align="center">
-<img src="images/the-three-states.png" alt="image" />
+![image](images/the-three-states.png)
 </p>
-</section><section id="commit" class="slide level2">
-<h2><em>Commit</em></h2>
-<ul>
-<li>Uma <em>imagem</em> do estado atual dos ficheiros</li>
-<li>Uma <em>mensagem</em> descritiva da alteração efetuada</li>
-<li>Meta-informação do autor e data</li>
-</ul>
-<p align="center">
-<img src="images/commit-repository-data.png" alt="image" />
-</p>
-<p>Qualquer <em>commit</em> pode ser inspecionado e recuperado se assim quisermos.</p>
+
+-->
 </section><section id="ciclo-de-vida" class="slide level2">
 <h2>Ciclo de Vida</h2>
 <p>Os ficheiros no directório de trabalho podem estar em quatro estados diferentes em relação à copia local doo repositório.</p>
@@ -473,8 +488,7 @@ R: Usamos <code>git reset HEAD</code> para remover um ficheiro da área de está
 </section><section id="section" class="slide level2">
 <h2></h2>
 <p align="center">
-<img src="images/git.png" alt="git_commit" /><br />
-
+<img src="images/in-case-of-fire.png" width=600/>
 </p>
 </section>
 <!-- {{{{ dzslides core
