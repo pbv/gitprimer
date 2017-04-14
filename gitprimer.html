@@ -135,7 +135,7 @@ Exemplos: <em>GNU arch</em>, <em>Darcs</em>, <em>Mercurial</em>, <em>Git</em>.</
 <h2>O que é o <em>Git</em>?</h2>
 <ul>
 <li>Um sistema de controlo de versões distribuído</li>
-<li>Desenvolvido desde 2005 para gestão do código do <em>kernel</em> Linux</li>
+<li>Desenvolvido desde 2005 para o código do <em>kernel</em> Linux</li>
 <li>Muito usado em projetos <em>open-source</em></li>
 <li>Características:
 <ul>
@@ -174,12 +174,12 @@ Exemplos: <em>GNU arch</em>, <em>Darcs</em>, <em>Mercurial</em>, <em>Git</em>.</
 </section><section id="integridade" class="slide level2">
 <h2>Integridade</h2>
 <ul>
-<li>O <em>Git</em> associa um <em>hash</em> a cada objeto guardado
+<li>O <em>Git</em> associa um <em>hash</em> a cada <em>commit</em>
 <ul>
 <li>40 carateres hexadecimais, e.g. <code>34ac2a6552252987aa493b52f8696cd6d3b00373</code></li>
 </ul></li>
 <li>Garante que o conteúdo dos ficheiros não foi corrompido</li>
-<li>Serve também para identificar cada <em>commit</em></li>
+<li>Serve também para identificar cada <em>snapshot</em></li>
 </ul>
 <p align="center">
 <img src="images/commit-hashes.png" alt="image" />
@@ -209,35 +209,10 @@ Exemplos: <em>GNU arch</em>, <em>Darcs</em>, <em>Mercurial</em>, <em>Git</em>.</
 </dd>
 </dl>
 <p><br />
-Necessitam de registo, mas permitem criar contas gratuitas (sujeitas a condições de uso).</p>
-<!--
-## Fluxo de trabalho básico
-
-**Modify**
-
-:     modificar os ficheiros no directório de trabalho
-
-**Stage**
-
-:     adicionar *snapshots* dos ficheiros à área de estágio
-    (*staging area*)
-    
-**Commit**
-
-:     registar um *snapshot* juntamente com uma mensagem
-descritiva
-
-
-## Operações básicas
-
-<p align="center">
-![image](images/the-three-states.png)
-</p>
-
--->
+Necessitam de registo, mas permitem criar contas gratuitas.</p>
 </section>
-<section id="utilização" class="titleslide slide level1"><h1>Utilização</h1></section><section id="utilização-do-git" class="slide level2">
-<h2>Utilização do <em>Git</em></h2>
+<section id="utilização" class="titleslide slide level1"><h1>Utilização</h1></section><section id="comando-git" class="slide level2">
+<h2>Comando <code>git</code></h2>
 <p>Utilizamos o comando <code>git</code> para as várias operações:</p>
 <blockquote>
 <p><code>git</code> operação arg1 arg2 ...</p>
@@ -248,10 +223,12 @@ descritiva
 </section><section id="configuração-inicial" class="slide level2">
 <h2>Configuração inicial</h2>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> config --global user.name <span class="st">&quot;My name&quot;</span>
-<span class="fu">git</span> config --global user.email my@email.com</code></pre></div>
-<p>Configurar editor de texto (opcional):</p>
+<span class="fu">git</span> config --global user.email my@email.domain</code></pre></div>
+<p><br />
+Configurar editor de texto (opcional):</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> config --global core.editor emacs</code></pre></div>
-<p>Listar configurações:</p>
+<p><br />
+Listar configurações:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> config --list</code></pre></div>
 </section><section id="inicializar-um-repositório" class="slide level2">
 <h2>Inicializar um Repositório</h2>
@@ -259,7 +236,7 @@ descritiva
 <span class="bu">cd</span> my-project
 <span class="fu">git</span> init</code></pre></div>
 <ul>
-<li><code>git init</code> cria um diretório <code>my-project/.git</code> para meta-dados</li>
+<li>cria um diretório <code>my-project/.git</code> para meta-dados</li>
 <li>o repositório está inicialmente <em>vazio</em>; devemos adicionar ficheiros e/ou sub-diretórios</li>
 </ul>
 </section><section id="adicionar-ficheiros" class="slide level2">
@@ -278,7 +255,7 @@ Os ficheiros ficam na <em>área de estágio</em>; temos de fazer <em>commit</em>
 <h2>Primeiro <em>Commit</em></h2>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> commit -m <span class="st">&quot;initialized repository&quot;</span></code></pre></div>
 <p><br />
-Se omitir a opção <code>-m</code> o <em>Git</em> abre o editor de texto para compor a mensagem.</p>
+Se omitir a opção <code>-m</code>, o <em>Git</em> abre um editor de texto.</p>
 </section><section id="modificar-ou-acrescentar" class="slide level2">
 <h2>Modificar ou acrescentar</h2>
 <p>Depois de modificar algum(s) dos ficheiros (e.g. usando um editor de texto) devemos:</p>
@@ -289,16 +266,16 @@ Se omitir a opção <code>-m</code> o <em>Git</em> abre o editor de texto para c
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">#  editar ficheiro README.txt</span>
 <span class="co">#  criar ficheiro LICENSE.txt</span>
 <span class="fu">git</span> add README.txt LICENSE.txt
-<span class="fu">git</span> commit -m <span class="st">&quot;modified README; created LICENSE&quot;</span></code></pre></div>
+<span class="fu">git</span> commit -m <span class="st">&quot;modified and created files&quot;</span></code></pre></div>
 </section><section id="modificar-ou-acrescentar-2" class="slide level2">
 <h2>Modificar ou acrescentar (2)</h2>
 <p>Podemos optar por registar as modificações em dois <em>commits</em> separados:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">#  editar ficheiro README.txt</span>
 <span class="co">#  criar ficheiro LICENSE.txt</span>
 <span class="fu">git</span> add README.txt 
-<span class="fu">git</span> commit -m <span class="st">&quot;modified README file&quot;</span>
+<span class="fu">git</span> commit -m <span class="st">&quot;modified file&quot;</span>
 <span class="fu">git</span> add LICENSE.txt
-<span class="fu">git</span> commit -m <span class="st">&quot;created LICENSE file&quot;</span></code></pre></div>
+<span class="fu">git</span> commit -m <span class="st">&quot;created file&quot;</span></code></pre></div>
 </section><section id="estados" class="slide level2">
 <h2>Estados</h2>
 <table>
@@ -322,8 +299,7 @@ Se omitir a opção <code>-m</code> o <em>Git</em> abre o editor de texto para c
 </p>
 </section><section id="consultar-o-estado" class="slide level2">
 <h2>Consultar o estado</h2>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> status
-  <span class="co"># ver estado da área de trabalho e de estágio</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> status</code></pre></div>
 <dl>
 <dt><code>Changes to be commited</code></dt>
 <dd><p>ficheiros modificados <strong>que serão incluidos</strong> no próximo <em>commit</em></p>
@@ -346,31 +322,56 @@ Exemplos</p>
 <span class="fu">git</span> log --oneline
 <span class="fu">git</span> log --since=01/04/2017 --author=<span class="st">&quot;Pedro&quot;</span></code></pre></div>
 <p>(Use <code>--help</code> para obter ajuda completa.)</p>
+</section><section id="checkout" class="slide level2">
+<h2><em>Checkout</em></h2>
+<p>O <em>Git</em> permite &quot;viajar no tempo&quot; do desenvolvimento do nosso projeto.</p>
+<p><br />
+Usamos <code>git checkout</code> para reverter o diretório de trabalho para <em>snapshots</em> específicos.</p>
+</section><section id="exemplo" class="slide level2">
+<h2>Exemplo</h2>
+<p>Listar todos os <em>snapshots</em> (mais recente primeiro):</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> log --all --oneline
+  <span class="co"># um commit por linha, hash curto</span></code></pre></div>
+<blockquote>
+<pre><code>7fd2d99 third commit
+7cf2ce7 second commit
+432bffa first commit</code></pre>
+</blockquote>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># reverter à primeira versão</span>
+<span class="fu">git</span> checkout 432bffa
+<span class="co"># ver ficheiros, etc.</span>
+<span class="co"># avançar até à última versão</span>
+<span class="fu">git</span> checkout 7fd2d99</code></pre></div>
 </section>
 <section id="sincronização-e-colaboração" class="titleslide slide level1"><h1>Sincronização e colaboração</h1></section><section id="repositórios-remotos" class="slide level2">
 <h2>Repositórios remotos</h2>
 <p>Em <em>Git</em> todos os repositórios têm a mesma estrutura e suportam os mesmos comandos.</p>
 <p><br />
 Um <em>repositório remoto</em> é apenas um diretório <em>Git</em> que está localizado noutro computador.</p>
-</section><section id="usar-um-repositório-remoto" class="slide level2">
-<h2>Usar um repositório remoto</h2>
-<p>Para copiar um repositório remoto já inicializado basta fazer <em>clone</em>:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> clone URL-do-repositório-remoto</code></pre></div>
+</section><section id="copiar-um-repositório-remoto" class="slide level2">
+<h2>Copiar um repositório remoto</h2>
+<p>Se o repositório remoto já foi inicializado:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> clone <span class="op">&lt;</span>url-remoto<span class="op">&gt;</span></code></pre></div>
 <ul>
-<li>O URL de um servidor remoto é tipicamente <code>https://...</code> ou <code>ssh://...</code></li>
-<li>Obtemos uma cópia local completa do repositório que podemos consultar e modificar livremente</li>
+<li>O accesso será tipicamente por HTTPS ou SSH</li>
+<li>Obtemos uma cópia completa podemos editar livremente</li>
+<li>Cria um repositório local num novo diretório com nome do projeto</li>
 </ul>
-</section><section id="usar-um-repositório-remoto-cont." class="slide level2">
-<h2>Usar um repositório remoto (cont.)</h2>
-<p>Podemos fazer alterações à copia local dos ficheiros tal como anteriormente.</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">  <span class="co"># editar ficheiros localmente</span>
+</section><section id="associar-um-repositório-remoto" class="slide level2">
+<h2>Associar um repositório remoto</h2>
+<p>Se o repositório local já foi inicializado:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="bu">cd</span> my-project
+<span class="fu">git</span> remote add origin <span class="op">&lt;</span>url-remoto<span class="op">&gt;</span>
+<span class="fu">git</span> push -u origin master</code></pre></div>
+</section><section id="modificar" class="slide level2">
+<h2>Modificar</h2>
+<p>Registamos alterações no repositório local (tal como anteriormente).</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># editar README src/foo.c</span>
 <span class="ex">...</span>
-<span class="fu">git</span> add ficheiro1
-<span class="fu">git</span> add ficheiro2
-<span class="ex">...</span>
-<span class="fu">git</span> commit -m <span class="st">&quot;mensagem descritiva...&quot;</span></code></pre></div>
+<span class="fu">git</span> add README src/foo.c
+<span class="fu">git</span> commit</code></pre></div>
 <p><br />
-Esta modificação foi <strong>registada apenas no repositório local</strong> --- nada foi enviado ao servidor remoto!</p>
+Este <em>commit</em> é registado <em>apenas</em> no repositório local; ainda nada foi enviado ao servidor remoto!</p>
 </section><section id="enviar-modificações" class="slide level2">
 <h2>Enviar modificações</h2>
 <p>Para enviar os seus <em>commits</em> locais para o repositório remoto usamos o comando <em>push</em>.</p>
@@ -380,42 +381,40 @@ Esta modificação foi <strong>registada apenas no repositório local</strong> -
 <p>Para receber alterações que outros tenham enviado ao repositório remoto usamos <em>pull</em>:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> pull</code></pre></div>
 <p>Este comando descarrega <em>commits</em> no repositório remoto feitos desde a última vez aplica-os ao repositório local.</p>
-</section><section id="como-coordenar-com-colaboradores" class="slide level2">
-<h2>Como coordenar com colaboradores</h2>
-<p>Sugestão para principiantes:</p>
+</section><section id="coordenar-com-colaboradores" class="slide level2">
+<h2>Coordenar com colaboradores</h2>
 <ul>
-<li>crie um repositório no servidor <em>GitHub/GitLab</em></li>
-<li>com um único <em>branch</em> de desenvolvimento (<em>master</em>)</li>
-<li>serve como o <em>ponto de sincronismo</em> entre os colaboradores</li>
-<li>quando estiver mais familiarizado, pode introduzir <em>branches</em> distintos para desenvolvimento seperado</li>
+<li>Crie um repositório num servidor <em>GitHub/GitLab</em></li>
+<li>Usado como <em>ponto de sincronização</em> entre os computadores/colaboradores</li>
+<li>Começe usando com um único <em>branch</em> de desenvolvimento (<em>master</em>)</li>
+<li>Quando estiver mais experiência, pode introduzir <em>branches</em> distintos para desenvolvimento separado</li>
 </ul>
-<!--
-## Repositório central
-
-* Servidor *Gitlab*: \
-  [https://gitlab01.alunos.dcc.fc.up.pt](https://gitlab01.alunos.dcc.fc.up.pt).
-* Interface *web* para projetos em *Git*
-* Semelhante ao *Github* mas mantido num servidor do DCC
-* Cada aluno tem uma conta pessoal (*login/password* do LabCC)
-* *Grupos* de dois alunos para os trabalhos --- criados durante as aulas 
--->
+</section><section id="merging" class="slide level2">
+<h2><em>Merging</em></h2>
+<p><img src="images/typical-merge.png" height=400 align="right"/></p>
+<ul>
+<li>Para juntar desenvolvimento divergente entre dois repositórios, o <em>Git</em> efetua uma operação de <em>merge</em></li>
+<li>O <em>merge</em> introduz num novo <em>snapshot</em> que unifica os ramos divergentes</li>
+<li>O <em>Git</em> tenta fazer <em>merge</em> automático sempre que executamos <code>push</code> ou <code>pull</code></li>
+<li>Mas: o <em>merge</em> automático falha em caso de <strong>conflitos</strong></li>
+</ul>
 </section><section id="conflitos" class="slide level2">
 <h2>Conflitos</h2>
-<p>Se um dos nossos <em>commits</em> modificar parte dum ficheiro que outro colaborador também editou, o <em>Git</em> vai sinalizar um <strong>conflito</strong>.</p>
+<p>Se dois <em>commits</em> divergentes modificarem o mesma o mesmo ficheiro o <em>Git</em> pode sinalizar um <strong>conflito</strong>.</p>
 <p><br />
-O conflito é detetado apenas quando tentarmos sincronizar com um repositório remoto (<code>pull</code> ou <code>push</code>).</p>
+O conflito é detetado quando tentarmos sincronizar com um repositório remoto (<code>pull</code> ou <code>push</code>).</p>
 </section><section id="resolver-conflitos" class="slide level2">
 <h2>Resolver Conflitos</h2>
 <ul>
-<li>O <em>Git</em> <strong>não resolve o conflito sozinho</strong></li>
-<li>O utilizador que provoca o conflito deve:</li>
-</ul>
+<li>O <em>Git</em> não resolve o conflito sozinho</li>
+<li>Para resolver devemos:
 <ol type="1">
-<li>editar os ficheiros afetados e juntar as alterções</li>
+<li>editar os ficheiros afetados e juntar as alterações</li>
 <li>registar um novo <em>commit</em> de resolução</li>
-<li>enviar a resolução para o repositório remoto</li>
-</ol>
-</section><section id="exemplo" class="slide level2">
+<li>efetuar <code>push</code> para o repositório remoto</li>
+</ol></li>
+</ul>
+</section><section id="exemplo-1" class="slide level2">
 <h2>Exemplo</h2>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> pull
 <span class="co"># CONFLICT (content): Merge conflict in file.txt</span></code></pre></div>
@@ -460,65 +459,54 @@ Registamos um novo <em>commit</em> de resolução:</p>
 </dd>
 </dl>
 </section>
-<section id="recomendações" class="titleslide slide level1"><h1>Recomendações</h1></section><section id="alguns-cuidados-a-ter" class="slide level2">
-<h2>Alguns cuidados a ter</h2>
+<section id="recomendações" class="titleslide slide level1"><h1>Recomendações</h1></section><section id="escolher-commits" class="slide level2">
+<h2>Escolher <em>commits</em></h2>
 <ul>
-<li>Fazer bons <em>commits</em>:
+<li>Use <code>git add</code> para juntar alterações relacionadas</li>
+<li>Componha <em>boas mensagens</em>:
 <ul>
-<li>use o <em>git add</em> para juntar apenas as alterações relacionadas</li>
-<li>escolha <em>boas mensagens</em>: o <strong>porquê</strong> do commit, não a quais os ficheiros (desnecessário!)</li>
+<li>não é útil listar os ficheiros alterados</li>
+<li>explicar o <strong>sentido</strong> do <em>commit</em></li>
 </ul></li>
-<li>Ter em atenção que, se alterarmos a história do repositório de forma descuidada, não estamos apenas a afectar-nos mas também aos nossos colegas de trabalho.</li>
 </ul>
 </section><section id="exemplos-de-más-mensagens" class="slide level2">
 <h2>Exemplos de más mensagens</h2>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> commit -m <span class="st">&quot;Últimas alterações.&quot;</span>
-<span class="fu">git</span> commit -m <span class="st">&quot;Alterações do Pedro.&quot;</span>
-<span class="fu">git</span> commit -m <span class="st">&quot;Adiciona o Jogador.java.&quot;</span>
-<span class="fu">git</span> commit -m <span class="st">&quot;Alterações no Jogador.java.&quot;</span>
-<span class="fu">git</span> commit -m <span class="st">&quot;Adiciona cenas.&quot;</span>
-<span class="fu">git</span> commit -m <span class="st">&quot;Revision&quot;</span>
-<span class="fu">git</span> commit -m <span class="st">&quot;Blablabla&quot;</span>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> commit -m <span class="st">&quot;últimas alterações.&quot;</span>
+<span class="fu">git</span> commit -m <span class="st">&quot;alterações do Pedro.&quot;</span>
+<span class="fu">git</span> commit -m <span class="st">&quot;adiciona o Jogador.java.&quot;</span>
+<span class="fu">git</span> commit -m <span class="st">&quot;alterações no Jogador.java.&quot;</span>
+<span class="fu">git</span> commit -m <span class="st">&quot;adiciona cenas.&quot;</span>
+<span class="fu">git</span> commit -m <span class="st">&quot;revision&quot;</span>
+<span class="fu">git</span> commit -m <span class="st">&quot;blablabla&quot;</span>
 <span class="fu">git</span> commit -m <span class="st">&quot;WTFWTFWTF&quot;</span></code></pre></div>
 </section><section id="exemplos-de-boas-mensagens" class="slide level2">
 <h2>Exemplos de boas mensagens</h2>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> commit -m <span class="st">&quot;Resolve o bug do prémio&quot;</span>
-<span class="fu">git</span> commit -m <span class="st">&quot;Remove duplicação de código&quot;</span>
-<span class="fu">git</span> commit -m <span class="st">&quot;Acrescenta contagem de pontuação&quot;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> commit -m <span class="st">&quot;resolve o bug do prémio&quot;</span>
+<span class="fu">git</span> commit -m <span class="st">&quot;remove duplicação de código&quot;</span>
+<span class="fu">git</span> commit -m <span class="st">&quot;acrescenta contagem de pontuação&quot;</span></code></pre></div>
 </section>
 <section id="extras" class="titleslide slide level1"><h1>Extras</h1></section><section id="mudar-nomes" class="slide level2">
 <h2>Mudar nomes</h2>
-<p>P: Como fazer para mudar o nome de um ficheiro ou diretório que foi registado no <em>Git</em>?</p>
-<p><br />
-R: Usamos <code>git mv</code> para mudar o nome de um ficheiro preservando a história de alterações.</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> mv nome-atual nome-novo</code></pre></div>
+<p>P: Como fazer para mudar o nome de um ficheiro ou diretório?</p>
+<p>R: Pode usar <code>git mv</code> para mudar o nome de um ficheiro preservando a história de alterações.</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> mv <span class="op">&lt;</span>nome-atual<span class="op">&gt;</span> <span class="op">&lt;</span>nome-novo<span class="op">&gt;</span></code></pre></div>
 </section><section id="desfazer-modificações" class="slide level2">
 <h2>Desfazer modificações</h2>
 <p>P: Editei um ficheiro na área de trabalho, mas agora quero desfazer essas alterações.</p>
-<p> </p>
-<p>R: Usamos <code>git checkout</code> para reverter modificações de volta para o estado registado no último <em>commit</em>:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> checkout -- nome-do-ficheiro</code></pre></div>
+<p>R: Pode usar <code>git checkout</code> para reverter modificações de volta para o estado registado no último <em>commit</em>.</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> checkout -- <span class="op">&lt;</span>ficheiro<span class="op">&gt;</span></code></pre></div>
 </section><section id="desfazer-stagging" class="slide level2">
 <h2>Desfazer <em>stagging</em></h2>
 <p>P: Adicionei um ficheiro à área de estágio, mas afinal não quero incluí-lo no próximo <em>commit</em>.</p>
-<p><br />
-R: Usamos <code>git reset HEAD</code> para remover um ficheiro da área de estágio:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> reset HEAD nome-do-ficheiro</code></pre></div>
-</section><section id="referências" class="slide level2">
-<h2>Referências</h2>
+<p>R: Pode usar <code>git reset HEAD</code> para remover um ficheiro da área de estágio.</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> reset HEAD <span class="op">&lt;</span>ficheiro<span class="op">&gt;</span></code></pre></div>
+</section><section id="mais-informação" class="slide level2">
+<h2>Mais informação</h2>
 <ul>
 <li><a href="http://git-scm.com/book/en/v2">Git Community Book</a></li>
-<li><a href="http://progit.org/">Pro Git</a></li>
 <li><a href="http://gitref.org/">Git Reference</a></li>
-<li><a href="http://github.com/">Github</a></li>
 <li><a href="https://www.atlassian.com/git/tutorials/">Atlassian git tutorial</a></li>
 <li><a href="http://gitimmersion.com/">Git immersion</a></li>
-</ul>
-</section><section id="guis-para-git" class="slide level2">
-<h2>GUIs para <em>Git</em></h2>
-<ul>
-<li><a href="http://www.sourcetreeapp.com">Sourcetree</a> (MacOS, Windows)</li>
-<li><a href="http://live.gnome.org/giggle">Giggle</a> (Linux)</li>
 </ul>
 </section><section id="section" class="slide level2">
 <h2></h2>

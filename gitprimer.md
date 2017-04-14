@@ -119,7 +119,7 @@ Desvantagens:
 ## O que é o *Git*?
 
 * Um sistema de controlo de versões distribuído 
-* Desenvolvido desde 2005 para gestão do código do *kernel* Linux
+* Desenvolvido desde 2005 para o código do *kernel* Linux
 * Muito usado em projetos *open-source*
 * Características:
 	* conceção simples mas poderosa
@@ -158,11 +158,11 @@ Desvantagens:
 
 ## Integridade 
 
-* O *Git* associa  um  *hash* a cada objeto guardado
+* O *Git* associa  um  *hash* a cada *commit*
       - 40 carateres hexadecimais, e.g.
 		`34ac2a6552252987aa493b52f8696cd6d3b00373`
 * Garante que o conteúdo dos ficheiros não foi corrompido
-* Serve também para identificar cada *commit* 
+* Serve também para identificar cada *snapshot* 
 
 <p align="center">
 ![image](images/commit-hashes.png)
@@ -197,42 +197,12 @@ GitLab
 
 \
 
-Necessitam de registo, mas
-permitem criar contas gratuitas (sujeitas a condições de uso).
-
-
-<!--
-## Fluxo de trabalho básico
-
-**Modify**
-
-:     modificar os ficheiros no directório de trabalho
-
-**Stage**
-
-:     adicionar *snapshots* dos ficheiros à área de estágio
-    (*staging area*)
-	
-**Commit**
-
-:     registar um *snapshot* juntamente com uma mensagem
-descritiva
-
-
-## Operações básicas
-
-<p align="center">
-![image](images/the-three-states.png)
-</p>
-
--->
-
-
+Necessitam de registo, mas permitem criar contas gratuitas.
 
 
 # Utilização 
 
-## Utilização do *Git*
+## Comando `git`
 
 Utilizamos o comando `git` para as várias operações:
 
@@ -250,14 +220,18 @@ git help
 
 ~~~bash
 git config --global user.name "My name"
-git config --global user.email my@email.com
+git config --global user.email my@email.domain
 ~~~
+
+\
 
 Configurar editor de texto (opcional):
 
 ~~~bash
 git config --global core.editor emacs
 ~~~
+
+\
 
 Listar configurações:
 
@@ -274,8 +248,7 @@ cd my-project
 git init
 ```
 
-* `git init` cria um diretório `my-project/.git`
-  para meta-dados 
+* cria um diretório `my-project/.git` para meta-dados 
 * o repositório está inicialmente *vazio*;
   devemos adicionar ficheiros e/ou sub-diretórios
 
@@ -310,8 +283,7 @@ git commit -m "initialized repository"
 ```
 \
 
-Se omitir a opção `-m` o *Git* abre o editor
-de texto para compor a mensagem.
+Se omitir a opção `-m`, o *Git* abre um editor de texto.
 
 
 ##  Modificar ou acrescentar
@@ -326,7 +298,7 @@ Depois de modificar algum(s) dos ficheiros
 #  editar ficheiro README.txt
 #  criar ficheiro LICENSE.txt
 git add README.txt LICENSE.txt
-git commit -m "modified README; created LICENSE"
+git commit -m "modified and created files"
 ~~~
 
 ## Modificar ou acrescentar (2)
@@ -338,9 +310,9 @@ em dois *commits* separados:
 #  editar ficheiro README.txt
 #  criar ficheiro LICENSE.txt
 git add README.txt 
-git commit -m "modified README file"
+git commit -m "modified file"
 git add LICENSE.txt
-git commit -m "created LICENSE file"
+git commit -m "created file"
 ~~~
 
 
@@ -362,10 +334,9 @@ git commit -m "created LICENSE file"
 ## Consultar o estado
 
 
-```bash
+~~~bash
 git status
-  # ver estado da área de trabalho e de estágio
-```
+~~~
 
 `Changes to be commited`
 
@@ -400,6 +371,46 @@ git log --since=01/04/2017 --author="Pedro"
 
 (Use `--help` para obter ajuda completa.)
 
+## *Checkout*
+
+
+O *Git* permite "viajar no tempo" do desenvolvimento do
+nosso projeto.
+
+\
+
+Usamos `git checkout` para reverter o diretório de trabalho para
+*snapshots* específicos.
+
+
+
+## Exemplo
+
+Listar todos os *snapshots* (mais recente primeiro):
+
+~~~bash
+git log --all --oneline
+  # um commit por linha, hash curto
+~~~
+
+> ~~~
+> 7fd2d99 third commit
+> 7cf2ce7 second commit
+> 432bffa first commit
+> ~~~
+
+~~~bash
+# reverter à primeira versão
+git checkout 432bffa
+# ver ficheiros, etc.
+# avançar até à última versão
+git checkout 7fd2d99
+~~~
+
+
+
+
+
 
 # Sincronização e colaboração
 
@@ -414,41 +425,47 @@ Um *repositório remoto* é apenas
 um diretório *Git* que está localizado noutro computador.
 
 
-## Usar um repositório remoto
+## Copiar um repositório remoto
 
-Para copiar um repositório remoto já inicializado
-basta fazer *clone*:
+Se o repositório remoto já foi inicializado:
 
-```bash
-git clone URL-do-repositório-remoto
-```
+~~~bash
+git clone <url-remoto>
+~~~
 
-* O URL de um servidor remoto é tipicamente
-  `https://...`  ou `ssh://...`
-* Obtemos uma cópia local completa do repositório que podemos 
-  consultar e modificar livremente
+* O accesso será tipicamente por HTTPS ou SSH
+* Obtemos uma cópia completa podemos editar livremente
+* Cria um repositório local num novo
+  diretório com nome do projeto
+
+## Associar um repositório remoto
+
+Se o repositório local já foi inicializado:
+
+~~~bash
+cd my-project
+git remote add origin <url-remoto>
+git push -u origin master
+~~~
 
 
-## Usar um repositório remoto (cont.)
+## Modificar
 
-Podemos fazer alterações à copia local dos ficheiros
-tal como anteriormente.
+Registamos alterações no repositório local
+(tal como anteriormente).
 
 
-```bash
-  # editar ficheiros localmente
+~~~bash
+# editar README src/foo.c
 ...
-git add ficheiro1
-git add ficheiro2
-...
-git commit -m "mensagem descritiva..."
-```
+git add README src/foo.c
+git commit
+~~~
 
 \
 
-Esta modificação foi
-**registada apenas no repositório local**
---- nada foi enviado ao servidor remoto!
+Este *commit* é registado *apenas* no repositório local;
+ainda nada foi enviado ao servidor remoto!
 
 
 ## Enviar modificações 
@@ -456,65 +473,63 @@ Esta modificação foi
 Para enviar os seus *commits* locais
 para o repositório remoto usamos o comando *push*.
 
-```bash
+~~~bash
 git push
-```
+~~~
 
 ## Receber modificações
 
 Para receber alterações que outros tenham enviado ao repositório remoto
 usamos *pull*:
 
-```bash
+~~~bash
 git pull
-```
+~~~
 
 Este comando descarrega *commits* no repositório remoto feitos desde a
 última vez aplica-os ao repositório local.
 
 
-## Como coordenar com colaboradores
+## Coordenar com colaboradores
 
-Sugestão para principiantes: 
-
-* crie um repositório no servidor *GitHub/GitLab*
-* com um único *branch* de desenvolvimento (*master*)
-* serve como o *ponto de sincronismo* entre os colaboradores
-* quando estiver mais familiarizado, pode introduzir *branches*
-  distintos para desenvolvimento seperado
+* Crie um repositório num servidor *GitHub/GitLab*
+* Usado como *ponto de sincronização* entre os computadores/colaboradores
+* Começe usando com um único *branch* de desenvolvimento (*master*)
+* Quando estiver mais experiência, pode introduzir *branches*
+  distintos para desenvolvimento separado
 
 
+## *Merging*
 
-<!--
-## Repositório central
+<img src="images/typical-merge.png" height=400 align="right"/>
 
-* Servidor *Gitlab*: \
-  [https://gitlab01.alunos.dcc.fc.up.pt](https://gitlab01.alunos.dcc.fc.up.pt).
-* Interface *web* para projetos em *Git*
-* Semelhante ao *Github* mas mantido num servidor do DCC
-* Cada aluno tem uma conta pessoal (*login/password* do LabCC)
-* *Grupos* de dois alunos para os trabalhos --- criados durante as aulas 
--->
+* Para juntar desenvolvimento divergente entre dois
+ repositórios, o *Git* efetua uma operação de *merge*
+* O *merge* introduz num novo *snapshot* que unifica
+  os ramos divergentes
+* O *Git* tenta fazer *merge* automático sempre que executamos
+  `push` ou `pull`
+* Mas: o *merge* automático falha em caso de **conflitos**
+
 
 ## Conflitos
 
-Se um dos nossos *commits* modificar parte dum ficheiro
-que outro colaborador também editou,
-o *Git* vai sinalizar um **conflito**.
+Se dois *commits* divergentes modificarem o mesma
+o mesmo ficheiro o *Git* pode sinalizar um **conflito**.
 
 \
 
-O conflito é detetado apenas quando tentarmos sincronizar com
+O conflito é detetado quando tentarmos sincronizar com
 um repositório remoto (`pull` ou `push`).
 
 ## Resolver Conflitos
 
-* O *Git* **não resolve o conflito sozinho**
-* O utilizador que provoca o conflito deve:
+* O *Git* não resolve o conflito sozinho
+* Para resolver devemos:
+      1. editar os ficheiros afetados e juntar as alterações
+      2. registar um novo *commit* de resolução
+      3. efetuar `push` para o repositório remoto
 
-1. editar os ficheiros afetados e juntar as alterções
-2. registar um novo *commit* de resolução
-3. enviar a resolução para o repositório remoto
 
 ## Exemplo
 
@@ -597,37 +612,32 @@ git push
 
 # Recomendações
 
-## Alguns cuidados a ter
+## Escolher *commits*
 
-* Fazer bons *commits*:
-    - use o *git add* para juntar apenas as alterações relacionadas 
-    - escolha *boas mensagens*: o **porquê** do commit,
-	  não a quais os ficheiros (desnecessário!) 
-	
-* Ter em atenção que, se alterarmos a história do repositório de forma
-  descuidada, não estamos apenas a afectar-nos mas também aos nossos
-  colegas de trabalho.
+* Use `git add` para juntar alterações relacionadas 
+* Componha *boas mensagens*:
+	   - não é útil listar os ficheiros alterados
+       - explicar o **sentido** do *commit*
 
 ## Exemplos de más mensagens
 
 ~~~bash
-git commit -m "Últimas alterações."
-git commit -m "Alterações do Pedro."
-git commit -m "Adiciona o Jogador.java."
-git commit -m "Alterações no Jogador.java."
-git commit -m "Adiciona cenas."
-git commit -m "Revision"
-git commit -m "Blablabla"
+git commit -m "últimas alterações."
+git commit -m "alterações do Pedro."
+git commit -m "adiciona o Jogador.java."
+git commit -m "alterações no Jogador.java."
+git commit -m "adiciona cenas."
+git commit -m "revision"
+git commit -m "blablabla"
 git commit -m "WTFWTFWTF"
 ~~~
 
 ## Exemplos de boas mensagens
 
-
 ~~~bash
-git commit -m "Resolve o bug do prémio"
-git commit -m "Remove duplicação de código"
-git commit -m "Acrescenta contagem de pontuação"
+git commit -m "resolve o bug do prémio"
+git commit -m "remove duplicação de código"
+git commit -m "acrescenta contagem de pontuação"
 ~~~
 
 # Extras
@@ -635,30 +645,27 @@ git commit -m "Acrescenta contagem de pontuação"
 ## Mudar nomes
 
 P: Como fazer para mudar o nome de um ficheiro
-ou diretório que foi registado no *Git*?
+ou diretório?
 
-\
-
-R: Usamos `git mv` para mudar o nome de um
+R: Pode usar `git mv` para mudar o nome de um
 ficheiro preservando a história de alterações.
 
-```bash
-git mv nome-atual nome-novo
-```
+~~~bash
+git mv <nome-atual> <nome-novo>
+~~~
 
 ## Desfazer modificações
 
 P: Editei um ficheiro na área de trabalho,
 mas agora quero desfazer essas alterações.
 
-\ 
 
-R: Usamos `git checkout` para reverter modificações de volta
-para o estado registado no último  *commit*:
+R: Pode usar `git checkout` para reverter modificações de volta
+para o estado registado no último  *commit*.
 
 
 ~~~bash
-git checkout -- nome-do-ficheiro
+git checkout -- <ficheiro>
 ~~~
 
 ## Desfazer *stagging*
@@ -666,30 +673,21 @@ git checkout -- nome-do-ficheiro
 P: Adicionei um ficheiro à área de estágio, mas
 afinal não quero incluí-lo no próximo  *commit*.
 
-\
 
-R: Usamos `git reset HEAD` para remover um ficheiro da área de estágio:
+R: Pode usar `git reset HEAD` para remover um ficheiro da área de estágio.
 
 ~~~bash
-git reset HEAD nome-do-ficheiro
+git reset HEAD <ficheiro>
 ~~~
 
 
 
-## Referências
+## Mais informação
 
 * [Git Community Book](http://git-scm.com/book/en/v2)
-* [Pro Git](http://progit.org/)
 * [Git Reference](http://gitref.org/)
-* [Github](http://github.com/)
 * [Atlassian git tutorial](https://www.atlassian.com/git/tutorials/)
 * [Git immersion](http://gitimmersion.com/)
-
-
-## GUIs para *Git*
-
-* [Sourcetree](http://www.sourcetreeapp.com) (MacOS, Windows)
-* [Giggle](http://live.gnome.org/giggle) (Linux)
 
 
 ## 
