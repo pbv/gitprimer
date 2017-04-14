@@ -128,7 +128,7 @@ Exemplos: <em>GNU arch</em>, <em>Darcs</em>, <em>Mercurial</em>, <em>Git</em>.</
 <p>Desvantagens:</p>
 <ul>
 <li>necessitam de mais espaço em disco</li>
-<li>a utilização pode ser mais complexa do que os sistemas tradicionais</li>
+<li>a utilização pode ser mais complexa</li>
 </ul>
 </section>
 <section id="git" class="titleslide slide level1"><h1>Git</h1></section><section id="o-que-é-o-git" class="slide level2">
@@ -140,7 +140,7 @@ Exemplos: <em>GNU arch</em>, <em>Darcs</em>, <em>Mercurial</em>, <em>Git</em>.</
 <li>Características:
 <ul>
 <li>conceção simples mas poderosa</li>
-<li>adequado a projectos grandes, com muitos ficheiros e com história longa</li>
+<li>adequado a projectos grandes (muitos ficheiros e história longa)</li>
 <li>eficiente em espaço e recursos computacionais</li>
 <li>suporte para desenvolvimento não-linear (&quot;<em>branching</em>&quot;)</li>
 <li>completamente distribuído</li>
@@ -165,19 +165,19 @@ Exemplos: <em>GNU arch</em>, <em>Darcs</em>, <em>Mercurial</em>, <em>Git</em>.</
 <h2>Como funciona</h2>
 <ul>
 <li>Cada repositório consiste de um conjunto de ficheiros e sub-diretórios</li>
-<li>Quando registamos uma modificação (<em>commit</em>), o <em>Git</em> guarda um <em>snapshot</em> de <em>todos</em> os ficheiros.
+<li>Quando registamos uma modificação (<em>commit</em>), o <em>Git</em> guarda um <em>snapshot</em> de <em>todos</em> os ficheiros</li>
+</ul>
 <p align="center">
 <img src="images/snapshots.png" width=600/>
 </p>
-NB: ficheiros inalterados são guardados como uma <em>referência</em> para a versão anterior.</li>
-</ul>
+<p>(NB: ficheiros inalterados são guardados como <em>referências</em>)</p>
 </section><section id="integridade" class="slide level2">
 <h2>Integridade</h2>
 <ul>
-<li>O <em>Git</em> associa a cada objeto guardado um <em>hash</em> criptográfico (40 carateres hexadecimais); e.g.:</li>
-</ul>
-<pre><code>  24b9da6552252987aa493b52f8696cd6d3b00373</code></pre>
+<li>O <em>Git</em> associa um <em>hash</em> a cada objeto guardado
 <ul>
+<li>40 carateres hexadecimais, e.g. <code>34ac2a6552252987aa493b52f8696cd6d3b00373</code></li>
+</ul></li>
 <li>Garante que o conteúdo dos ficheiros não foi corrompido</li>
 <li>Serve também para identificar cada <em>commit</em></li>
 </ul>
@@ -235,57 +235,91 @@ descritiva
 </p>
 
 -->
-</section><section id="ciclo-de-vida" class="slide level2">
-<h2>Ciclo de Vida</h2>
-<p>Os ficheiros no directório de trabalho podem estar em quatro estados diferentes em relação à copia local doo repositório.</p>
-<p align="center">
-<img src="images/file-status-lifecycle.png" alt="image" />
-</p>
 </section>
-<section id="utilização-do-git" class="titleslide slide level1"><h1>Utilização do <em>Git</em></h1></section><section id="configuração-inicial" class="slide level2">
+<section id="utilização" class="titleslide slide level1"><h1>Utilização</h1></section><section id="utilização-do-git" class="slide level2">
+<h2>Utilização do <em>Git</em></h2>
+<p>Utilizamos o comando <code>git</code> para as várias operações:</p>
+<blockquote>
+<p><code>git</code> operação arg1 arg2 ...</p>
+</blockquote>
+<p>Exemplo:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> log --oneline
+<span class="fu">git</span> help</code></pre></div>
+</section><section id="configuração-inicial" class="slide level2">
 <h2>Configuração inicial</h2>
-<h4 id="escolher-o-nome-e-e-email">Escolher o nome e e-email</h4>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> config --global user.name <span class="st">&quot;Pedro...&quot;</span>
-<span class="fu">git</span> config --global user.email pbv@dcc.fc.up.pt</code></pre></div>
-<h4 id="mais-configurações-opcionais">Mais configurações (opcionais)</h4>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> config --global user.name <span class="st">&quot;My name&quot;</span>
+<span class="fu">git</span> config --global user.email my@email.com</code></pre></div>
+<p>Configurar editor de texto (opcional):</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> config --global core.editor emacs</code></pre></div>
+<p>Listar configurações:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> config --list</code></pre></div>
-<h4 id="obter-ajuda">Obter ajuda</h4>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> help </code></pre></div>
-</section><section id="inicializar-um-repositório-local" class="slide level2">
-<h2>Inicializar um repositório local</h2>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">mkdir</span> my_project
-<span class="bu">cd</span> my_project
+</section><section id="inicializar-um-repositório" class="slide level2">
+<h2>Inicializar um Repositório</h2>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">mkdir</span> my-project
+<span class="bu">cd</span> my-project
 <span class="fu">git</span> init</code></pre></div>
 <ul>
-<li>inicializa um diretório <code>my_project/.git</code> que vai conter a base de dados do <em>Git</em></li>
-<li>o repositório é inicializado <em>vazio</em></li>
-<li>devemos adicionar ficheiros e/ou diretórios</li>
+<li><code>git init</code> cria um diretório <code>my-project/.git</code> para meta-dados</li>
+<li>o repositório está inicialmente <em>vazio</em>; devemos adicionar ficheiros e/ou sub-diretórios</li>
 </ul>
 </section><section id="adicionar-ficheiros" class="slide level2">
 <h2>Adicionar ficheiros</h2>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> add ficheiro1
-<span class="fu">git</span> add ficheiro2 </code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># editar ficheiros </span>
+<span class="co"># e.g. src/foo.c, src/bar.h, README.txt</span>
+<span class="fu">git</span> add src/foo.c
+<span class="fu">git</span> add src/bar.h
+<span class="fu">git</span> add README.txt</code></pre></div>
 <p><br />
-Vários ficheiros de uma só vez:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> add ficheiro1 ficheiro2 </code></pre></div>
+Podemos adicionar vários ficheiros de uma só vez:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> add src/foo.c src/bar.h README.txt</code></pre></div>
 <p><br />
-Os ficheiros ficam na <em>área de estágio</em> --- temos de fazer um <em>commit</em> para os registar na base de dados do <em>Git</em>.</p>
+Os ficheiros ficam na <em>área de estágio</em>; temos de fazer <em>commit</em> para registar na base de dados do <em>Git</em>.</p>
 </section><section id="primeiro-commit" class="slide level2">
 <h2>Primeiro <em>Commit</em></h2>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> commit -m <span class="st">&quot;Inicialização do repositório&quot;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> commit -m <span class="st">&quot;initialized repository&quot;</span></code></pre></div>
 <p><br />
-NB: podemos adicionar mais ficheiros posteriormente.</p>
-</section><section id="modificar-ficheiros" class="slide level2">
-<h2>Modificar ficheiros</h2>
+Se omitir a opção <code>-m</code> o <em>Git</em> abre o editor de texto para compor a mensagem.</p>
+</section><section id="modificar-ou-acrescentar" class="slide level2">
+<h2>Modificar ou acrescentar</h2>
 <p>Depois de modificar algum(s) dos ficheiros (e.g. usando um editor de texto) devemos:</p>
 <ol type="1">
 <li>adicionar os ficheiros modificados à àrea de estágio</li>
 <li>registar um <em>commit</em> com uma mensagem descritiva.</li>
 </ol>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">emacs</span>    <span class="co"># editar ficheiros </span>
-<span class="ex">...</span>
-<span class="fu">git</span> add ficheiro1 ficheiro2
-<span class="fu">git</span> commit -m <span class="op">&lt;</span>mensagem<span class="op">&gt;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">#  editar ficheiro README.txt</span>
+<span class="co">#  criar ficheiro LICENSE.txt</span>
+<span class="fu">git</span> add README.txt LICENSE.txt
+<span class="fu">git</span> commit -m <span class="st">&quot;modified README; created LICENSE&quot;</span></code></pre></div>
+</section><section id="modificar-ou-acrescentar-2" class="slide level2">
+<h2>Modificar ou acrescentar (2)</h2>
+<p>Podemos optar por registar as modificações em dois <em>commits</em> separados:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">#  editar ficheiro README.txt</span>
+<span class="co">#  criar ficheiro LICENSE.txt</span>
+<span class="fu">git</span> add README.txt 
+<span class="fu">git</span> commit -m <span class="st">&quot;modified README file&quot;</span>
+<span class="fu">git</span> add LICENSE.txt
+<span class="fu">git</span> commit -m <span class="st">&quot;created LICENSE file&quot;</span></code></pre></div>
+</section><section id="estados" class="slide level2">
+<h2>Estados</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><em>Committed</em></td>
+<td style="text-align: center;">guardados na base de dados local</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>Modified</em></td>
+<td style="text-align: center;">modificados em relação à versão guardada</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><em>Staged</em></td>
+<td style="text-align: center;">marcados para entrar no próximo <em>commit</em></td>
+</tr>
+</tbody>
+</table>
+<p align="center">
+<img src="images/areas.png" width=600/>
+</p>
 </section><section id="consultar-o-estado" class="slide level2">
 <h2>Consultar o estado</h2>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> status
@@ -303,14 +337,15 @@ NB: podemos adicionar mais ficheiros posteriormente.</p>
 </dl>
 </section><section id="outras-consultas" class="slide level2">
 <h2>Outras consultas</h2>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> diff
- <span class="co"># listar modificações desde o último commit</span></code></pre></div>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> log
-  <span class="co"># Listar o histórico de commits</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> diff  <span class="co"># listar modificações </span>
+<span class="fu">git</span> log   <span class="co"># listar o histórico de commits</span></code></pre></div>
 <p><br />
-Estes comandos aceitam muitas opções extra; ver ajuda no manual:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> diff --help
-<span class="fu">git</span> log --help</code></pre></div>
+Exemplos</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> diff 
+<span class="fu">git</span> diff src/foo.c
+<span class="fu">git</span> log --oneline
+<span class="fu">git</span> log --since=01/04/2017 --author=<span class="st">&quot;Pedro&quot;</span></code></pre></div>
+<p>(Use <code>--help</code> para obter ajuda completa.)</p>
 </section>
 <section id="sincronização-e-colaboração" class="titleslide slide level1"><h1>Sincronização e colaboração</h1></section><section id="repositórios-remotos" class="slide level2">
 <h2>Repositórios remotos</h2>

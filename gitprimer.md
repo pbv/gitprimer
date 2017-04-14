@@ -111,7 +111,7 @@ Vantagens sobre sistemas centralizados:
 Desvantagens:
 
 * necessitam de mais espaço em disco 
-* a utilização pode ser mais complexa do que os sistemas tradicionais
+* a utilização pode ser mais complexa
 
 
 # Git
@@ -123,8 +123,7 @@ Desvantagens:
 * Muito usado em projetos *open-source*
 * Características:
 	* conceção simples mas poderosa
-	* adequado a projectos grandes, com
-	  muitos ficheiros e com história longa
+	* adequado a projectos grandes (muitos ficheiros e história longa)
 	* eficiente em espaço e recursos computacionais
 	* suporte para desenvolvimento não-linear ("*branching*")
 	* completamente distribuído
@@ -147,23 +146,21 @@ Desvantagens:
 * Cada repositório consiste
   de um conjunto de ficheiros e sub-diretórios
 * Quando registamos uma modificação (*commit*),
-  o *Git* guarda um *snapshot* de *todos* os ficheiros.
-  <p align="center">
+  o *Git* guarda um *snapshot* de *todos* os ficheiros 
+
+<p align="center">
   <img src="images/snapshots.png" width=600/>
-  </p>
-  NB: ficheiros inalterados são guardados como uma *referência*
-  para a versão anterior.
+</p>
+(NB: ficheiros inalterados são guardados como  *referências*)
+
+
 
 
 ## Integridade 
 
-* O *Git* associa a cada objeto guardado
-  um  *hash* criptográfico (40 carateres hexadecimais); e.g.:
-
-~~~
-  24b9da6552252987aa493b52f8696cd6d3b00373
-~~~
-
+* O *Git* associa  um  *hash* a cada objeto guardado
+      - 40 carateres hexadecimais, e.g.
+		`34ac2a6552252987aa493b52f8696cd6d3b00373`
 * Garante que o conteúdo dos ficheiros não foi corrompido
 * Serve também para identificar cada *commit* 
 
@@ -232,84 +229,92 @@ descritiva
 
 
 
-## Ciclo de Vida
 
-Os ficheiros no directório de trabalho podem estar em quatro estados
-diferentes em relação à copia local doo repositório.
+# Utilização 
 
-<p align="center">
-![image](images/file-status-lifecycle.png)
-</p>
+## Utilização do *Git*
 
+Utilizamos o comando `git` para as várias operações:
 
-# Utilização do *Git* 
+> `git` operação arg1 arg2 ...
 
-## Configuração inicial 
-
-#### Escolher o nome e e-email
+Exemplo:
 
 ~~~bash
-git config --global user.name "Pedro..."
-git config --global user.email pbv@dcc.fc.up.pt
+git log --oneline
+git help
 ~~~
 
 
-#### Mais configurações (opcionais)
+## Configuração inicial 
+
+~~~bash
+git config --global user.name "My name"
+git config --global user.email my@email.com
+~~~
+
+Configurar editor de texto (opcional):
+
+~~~bash
+git config --global core.editor emacs
+~~~
+
+Listar configurações:
 
 ```bash
 git config --list
 ```
 
-#### Obter ajuda
+
+## Inicializar um Repositório 
 
 ```bash
-git help 
-```
-
-
-## Inicializar um repositório local
-
-```bash
-mkdir my_project
-cd my_project
+mkdir my-project
+cd my-project
 git init
 ```
 
-* inicializa um diretório `my_project/.git`
-  que vai conter a base de dados do *Git*
-* o repositório é inicializado *vazio*
-* devemos adicionar ficheiros e/ou diretórios
+* `git init` cria um diretório `my-project/.git`
+  para meta-dados 
+* o repositório está inicialmente *vazio*;
+  devemos adicionar ficheiros e/ou sub-diretórios
+
 
 ## Adicionar ficheiros
 
-```bash
-git add ficheiro1
-git add ficheiro2 
-```
+~~~bash
+# editar ficheiros 
+# e.g. src/foo.c, src/bar.h, README.txt
+git add src/foo.c
+git add src/bar.h
+git add README.txt
+~~~
 \
 
-Vários ficheiros de uma só vez:
+Podemos adicionar vários ficheiros de uma só vez:
 
-```bash
-git add ficheiro1 ficheiro2 
-```
+~~~bash
+git add src/foo.c src/bar.h README.txt
+~~~
+
 
 \
 
-Os ficheiros ficam na *área de estágio* --- temos de fazer um
-*commit* para os registar na base de dados do *Git*.
+Os ficheiros ficam na *área de estágio*; temos de fazer 
+*commit* para registar na base de dados do *Git*.
 
 ## Primeiro *Commit*
 
 ```bash
-git commit -m "Inicialização do repositório"
+git commit -m "initialized repository"
 ```
 \
 
-NB: podemos adicionar mais ficheiros posteriormente.
+Se omitir a opção `-m` o *Git* abre o editor
+de texto para compor a mensagem.
 
 
-##  Modificar ficheiros
+##  Modificar ou acrescentar
 
 Depois de modificar algum(s) dos ficheiros 
 (e.g.\ usando um editor de texto) devemos:
@@ -317,12 +322,42 @@ Depois de modificar algum(s) dos ficheiros
 1. adicionar os ficheiros modificados à àrea de estágio
 2. registar um *commit* com uma mensagem descritiva.
 
-```bash
-emacs    # editar ficheiros 
-...
-git add ficheiro1 ficheiro2
-git commit -m <mensagem>
-```
+~~~bash
+#  editar ficheiro README.txt
+#  criar ficheiro LICENSE.txt
+git add README.txt LICENSE.txt
+git commit -m "modified README; created LICENSE"
+~~~
+
+## Modificar ou acrescentar (2)
+
+Podemos optar por registar as modificações
+em dois *commits* separados:
+
+~~~bash
+#  editar ficheiro README.txt
+#  criar ficheiro LICENSE.txt
+git add README.txt 
+git commit -m "modified README file"
+git add LICENSE.txt
+git commit -m "created LICENSE file"
+~~~
+
+
+
+## Estados 
+
+------------  -----------------------------------------------------
+*Committed*    guardados na base de dados local 
+*Modified*     modificados em relação à versão guardada
+*Staged*       marcados para entrar no próximo *commit*
+------------  ------------------------------------------------------
+
+<p align="center">
+<img src="images/areas.png" width=600/>
+</p>
+
+
 
 ## Consultar o estado
 
@@ -349,24 +384,21 @@ git status
 
 
 ```bash
-git diff
- # listar modificações desde o último commit
-```
-
-```bash
-git log
-  # Listar o histórico de commits
+git diff  # listar modificações 
+git log   # listar o histórico de commits
 ```
 \
 
-Estes comandos aceitam muitas opções extra; ver ajuda
-no manual:
+Exemplos 
 
 ~~~bash
-git diff --help
-git log --help
+git diff 
+git diff src/foo.c
+git log --oneline
+git log --since=01/04/2017 --author="Pedro"
 ~~~
 
+(Use `--help` para obter ajuda completa.)
 
 
 # Sincronização e colaboração
