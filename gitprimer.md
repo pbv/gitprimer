@@ -1,11 +1,10 @@
-
 ---
-title: "Introdução ao *Git*"
+title: Introdução ao *Git*
 author: Pedro Vasconcelos, DCC/FCUP
 date: Abril 2017
 ...
 
-# 
+# Introdução ao *Git*
 
 ## Esta apresentação
 
@@ -126,9 +125,9 @@ Desvantagens:
 * a utilização pode ser mais complexa
 
 
-# Git
+# <img src="images/Git-Logo-2Color.png" width=300/>
 
-## O que é o *Git*?
+## <img src="images/Git-Logo-2Color.png" width=250/>
 
 * Um sistema de controlo de versões distribuído 
 * Desenvolvido desde 2005 para o código do *kernel* Linux
@@ -138,7 +137,6 @@ Desvantagens:
 	* adequado a projectos grandes (muitos ficheiros e história longa)
 	* eficiente em espaço e recursos computacionais
 	* suporte para desenvolvimento não-linear ("*branching*")
-	* completamente distribuído
 
 
 ## Porquê usar?

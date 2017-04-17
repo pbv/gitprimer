@@ -51,29 +51,42 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
     <span class="author">Pedro Vasconcelos, DCC/FCUP</span> · <span class="date">Abril 2017</span>
   </footer>
 </section>
-<section id="controlo-de-versões" class="titleslide slide level1"><h1>Controlo de Versões</h1></section><section id="controlo-de-versões-1" class="slide level2">
-<h2>Controlo de Versões</h2>
+<section id="introdução-ao-git" class="titleslide slide level1"><h1>Introdução ao <em>Git</em></h1></section><section id="esta-apresentação" class="slide level2">
+<h2>Esta apresentação</h2>
+<ul>
+<li>Introdução ao uso do sistema de controlo de versões <em>Git</em></li>
+<li>Direcionado para estudantes dos primeiros anos</li>
+<li>Necessita apenas de ferramentas básicas
+<ul>
+<li>editor de texto, <em>shell</em>, <em>browser web</em></li>
+<li>em sistemas Unix, Linux, MacOS(?)</li>
+</ul></li>
+<li>Slides: <a href="https://github.com/pbv/gitprimer" class="uri">https://github.com/pbv/gitprimer</a></li>
+</ul>
+</section>
+<section id="conceitos" class="titleslide slide level1"><h1>Conceitos</h1></section><section id="sistemas-de-controlo-de-versões" class="slide level2">
+<h2>Sistemas de controlo de versões</h2>
 <p>Sistemas de controlo de versões (VCS) são ferramentas para:</p>
 <ul>
 <li>arquivar ficheiros de um projeto (código-fonte e outros)</li>
 <li>registar alterações durante o desenvolvimento</li>
 <li>desfazer alterações ou recuperar versões anteriores</li>
 <li>sincronizar diferentes computadores</li>
-<li>colaborar com programadores (locais ou à distância)</li>
+<li>colaborar com programadores</li>
 <li>separar &quot;troncos&quot; de desenvolvimento (e.g. produção/desenvolvimento)</li>
 </ul>
 </section><section id="sistemas-locais" class="slide level2">
-<h2>Sistemas Locais</h2>
+<h2>Sistemas locais</h2>
 <p>Os primeiros <em>VCS</em> registavam modificações de ficheiros apenas numa base de dados local.</p>
 <p><br />
 Exemplos: <em>SCCS</em>, <em>RCS</em>.</p>
 </section><section id="sistemas-locais-2" class="slide level2">
-<h2>Sistemas Locais (2)</h2>
+<h2>Sistemas locais (2)</h2>
 <p align="center">
 <img src="images/local-version-control-600.png" alt="image" />
 </p>
 </section><section id="sistemas-locais-3" class="slide level2">
-<h2>Sistemas Locais (3)</h2>
+<h2>Sistemas locais (3)</h2>
 <p>Permitem:</p>
 <ul>
 <li>registar e desfazer edições;</li>
@@ -85,17 +98,17 @@ Exemplos: <em>SCCS</em>, <em>RCS</em>.</p>
 <li>colaboração entre programadores.</li>
 </ul>
 </section><section id="sistemas-centralizados" class="slide level2">
-<h2>Sistemas Centralizados</h2>
+<h2>Sistemas centralizados</h2>
 <p>Os <em>sistemas centralizados</em> registam alterações numa base de dados central; todos os clientes utilizam a mesma base de dados.</p>
 <p><br />
 Exemplos: <em>CVS</em>, <em>SVN</em></p>
 </section><section id="sistemas-centralizados-2" class="slide level2">
-<h2>Sistemas Centralizados (2)</h2>
+<h2>Sistemas centralizados (2)</h2>
 <p align="center">
 <img src="images/centralized-800px.png" alt="image" />
 </p>
 </section><section id="sistemas-centralizados-3" class="slide level2">
-<h2>Sistemas Centralizados (3)</h2>
+<h2>Sistemas centralizados (3)</h2>
 <p>Vantagens sobre os sistemas locais:</p>
 <ul>
 <li>sincronização entre computadores</li>
@@ -107,17 +120,17 @@ Exemplos: <em>CVS</em>, <em>SVN</em></p>
 <li>o servidor constitui um <em>ponto crítico de falha</em></li>
 </ul>
 </section><section id="sistemas-distribuídos" class="slide level2">
-<h2>Sistemas Distribuídos</h2>
+<h2>Sistemas distribuídos</h2>
 <p>Nos sistemas distribuidos cada cópia do repositório mantém também a <em>base de dados de modificações</em>.</p>
 <p><br />
 Exemplos: <em>GNU arch</em>, <em>Darcs</em>, <em>Mercurial</em>, <em>Git</em>.</p>
 </section><section id="sistemas-distribuídos-2" class="slide level2">
-<h2>Sistemas Distribuídos (2)</h2>
+<h2>Sistemas distribuídos (2)</h2>
 <p align="center">
 <img src="images/distributed-600.png" alt="image" />
 </p>
 </section><section id="sistemas-distribuidos-3" class="slide level2">
-<h2>Sistemas Distribuidos (3)</h2>
+<h2>Sistemas distribuidos (3)</h2>
 <p>Vantagens sobre sistemas centralizados:</p>
 <ul>
 <li>todas as cópias do repositório contêm a historia completa</li>
@@ -131,8 +144,8 @@ Exemplos: <em>GNU arch</em>, <em>Darcs</em>, <em>Mercurial</em>, <em>Git</em>.</
 <li>a utilização pode ser mais complexa</li>
 </ul>
 </section>
-<section id="git" class="titleslide slide level1"><h1>Git</h1></section><section id="o-que-é-o-git" class="slide level2">
-<h2>O que é o <em>Git</em>?</h2>
+<section id="section" class="titleslide slide level1"><h1><img src="images/Git-Logo-2Color.png" width=300/></h1></section><section id="section-1" class="slide level2">
+<h2><img src="images/Git-Logo-2Color.png" width=250/></h2>
 <ul>
 <li>Um sistema de controlo de versões distribuído</li>
 <li>Desenvolvido desde 2005 para o código do <em>kernel</em> Linux</li>
@@ -143,7 +156,6 @@ Exemplos: <em>GNU arch</em>, <em>Darcs</em>, <em>Mercurial</em>, <em>Git</em>.</
 <li>adequado a projectos grandes (muitos ficheiros e história longa)</li>
 <li>eficiente em espaço e recursos computacionais</li>
 <li>suporte para desenvolvimento não-linear (&quot;<em>branching</em>&quot;)</li>
-<li>completamente distribuído</li>
 </ul></li>
 </ul>
 </section><section id="porquê-usar" class="slide level2">
@@ -174,10 +186,10 @@ Exemplos: <em>GNU arch</em>, <em>Darcs</em>, <em>Mercurial</em>, <em>Git</em>.</
 </section><section id="integridade" class="slide level2">
 <h2>Integridade</h2>
 <ul>
-<li>O <em>Git</em> associa um <em>hash</em> a cada <em>commit</em>
+<li>O <em>Git</em> associa um <em>hash</em> (40 carateres hexadecimais) a cada <em>snapshot</em>, e.g.:</li>
+</ul>
+<pre><code>  34ac2a6552252987aa493b52f8696cd6d3b00373</code></pre>
 <ul>
-<li>40 carateres hexadecimais, e.g. <code>34ac2a6552252987aa493b52f8696cd6d3b00373</code></li>
-</ul></li>
 <li>Garante que o conteúdo dos ficheiros não foi corrompido</li>
 <li>Serve também para identificar cada <em>snapshot</em></li>
 </ul>
@@ -185,7 +197,7 @@ Exemplos: <em>GNU arch</em>, <em>Darcs</em>, <em>Mercurial</em>, <em>Git</em>.</
 <img src="images/commit-hashes.png" alt="image" />
 </p>
 </section><section id="repositórios-locais-e-remotos" class="slide level2">
-<h2>Repositórios Locais e Remotos</h2>
+<h2>Repositórios locais e remotos</h2>
 <ul>
 <li>Quase todas as operações com <em>Git</em> são <strong>locais</strong>:
 <ul>
@@ -199,7 +211,7 @@ Exemplos: <em>GNU arch</em>, <em>Darcs</em>, <em>Mercurial</em>, <em>Git</em>.</
 <li>Um repositório remoto é apenas um diretório <em>Git</em> noutro computador na rede!</li>
 </ul>
 </section><section id="hosting-de-repositórios" class="slide level2">
-<h2><em>Hosting</em> de Repositórios</h2>
+<h2><em>Hosting</em> de repositórios</h2>
 <dl>
 <dt>GitHub</dt>
 <dd><p><a href="https://github.com/" class="uri">https://github.com/</a></p>
@@ -231,7 +243,7 @@ Configurar editor de texto (opcional):</p>
 Listar configurações:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> config --list</code></pre></div>
 </section><section id="inicializar-um-repositório" class="slide level2">
-<h2>Inicializar um Repositório</h2>
+<h2>Inicializar um repositório</h2>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">mkdir</span> my-project
 <span class="bu">cd</span> my-project
 <span class="fu">git</span> init</code></pre></div>
@@ -252,7 +264,7 @@ Podemos adicionar vários ficheiros de uma só vez:</p>
 <p><br />
 Os ficheiros ficam na <em>área de estágio</em>; temos de fazer <em>commit</em> para registar na base de dados do <em>Git</em>.</p>
 </section><section id="primeiro-commit" class="slide level2">
-<h2>Primeiro <em>Commit</em></h2>
+<h2>Primeiro <em>commit</em></h2>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> commit -m <span class="st">&quot;initialized repository&quot;</span></code></pre></div>
 <p><br />
 Se omitir a opção <code>-m</code>, o <em>Git</em> abre um editor de texto.</p>
@@ -324,7 +336,7 @@ Exemplos</p>
 <p>(Use <code>--help</code> para obter ajuda completa.)</p>
 </section><section id="checkout" class="slide level2">
 <h2><em>Checkout</em></h2>
-<p>O <em>Git</em> permite &quot;viajar no tempo&quot; do desenvolvimento do nosso projeto.</p>
+<p>O <em>Git</em> permite &quot;viajar no tempo&quot; de desenvolvimento do projeto.</p>
 <p><br />
 Usamos <code>git checkout</code> para reverter o diretório de trabalho para <em>snapshots</em> específicos.</p>
 </section><section id="exemplo" class="slide level2">
@@ -393,27 +405,23 @@ Este <em>commit</em> é registado <em>apenas</em> no repositório local; ainda n
 <h2><em>Merging</em></h2>
 <p><img src="images/typical-merge.png" height=400 align="right"/></p>
 <ul>
-<li>Para juntar desenvolvimento divergente entre dois repositórios, o <em>Git</em> efetua uma operação de <em>merge</em></li>
+<li>Juntar desenvolvimento divergente: operação de <em>merge</em></li>
 <li>O <em>merge</em> introduz num novo <em>snapshot</em> que unifica os ramos divergentes</li>
 <li>O <em>Git</em> tenta fazer <em>merge</em> automático sempre que executamos <code>push</code> ou <code>pull</code></li>
 <li>Mas: o <em>merge</em> automático falha em caso de <strong>conflitos</strong></li>
 </ul>
 </section><section id="conflitos" class="slide level2">
 <h2>Conflitos</h2>
-<p>Se dois <em>commits</em> divergentes modificarem o mesma o mesmo ficheiro o <em>Git</em> pode sinalizar um <strong>conflito</strong>.</p>
+<p>Se dois <em>commits</em> separados modificarem um mesmo ficheiro o <em>Git</em> pode sinalizar um <strong>conflito</strong>.</p>
 <p><br />
 O conflito é detetado quando tentarmos sincronizar com um repositório remoto (<code>pull</code> ou <code>push</code>).</p>
 </section><section id="resolver-conflitos" class="slide level2">
-<h2>Resolver Conflitos</h2>
-<ul>
-<li>O <em>Git</em> não resolve o conflito sozinho</li>
-<li>Para resolver devemos:
+<h2>Resolver conflitos</h2>
 <ol type="1">
-<li>editar os ficheiros afetados e juntar as alterações</li>
-<li>registar um novo <em>commit</em> de resolução</li>
-<li>efetuar <code>push</code> para o repositório remoto</li>
-</ol></li>
-</ul>
+<li>Editar os ficheiros afetados e juntar as alterações</li>
+<li>Registar um novo <em>commit</em> de resolução</li>
+<li>Efetuar <code>push</code> para o repositório remoto</li>
+</ol>
 </section><section id="exemplo-1" class="slide level2">
 <h2>Exemplo</h2>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> pull
@@ -426,38 +434,20 @@ Goodbye
 <p><br />
 Entre <code>&lt;&lt;&lt;&lt;&lt;&lt;</code> e <code>=====</code> é a <strong>modificação local</strong>.</p>
 <p>Entre <code>======</code> e <code>&gt;&gt;&gt;&gt;&gt;&gt;</code> é a <strong>modificação remota</strong>.</p>
-</section><section id="resolver-o-conflito" class="slide level2">
-<h2>Resolver o conflito</h2>
+</section><section id="resolver-o-conflito-1" class="slide level2">
+<h2>Resolver o conflito (1)</h2>
 <p>Editamos <code>file.txt</code> e juntamos as modificações:</p>
 <pre><code>Hello world
 Goodbye</code></pre>
-<p><br />
-Registamos um novo <em>commit</em> de resolução:</p>
+</section><section id="resolver-o-conflito-2" class="slide level2">
+<h2>Resolver o conflito (2)</h2>
+<p>Registamos um <em>commit</em> de resolução:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> add file.txt
 <span class="fu">git</span> commit -m <span class="st">&quot;resolver conflito&quot;</span></code></pre></div>
-</section><section id="resolver-o-conflito-cont." class="slide level2">
-<h2>Resolver o conflito (cont.)</h2>
+</section><section id="resolver-o-conflito-3" class="slide level2">
+<h2>Resolver o conflito (3)</h2>
 <p>Por fim, fazemos o <code>push</code> da resolução para o repositório remoto.</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> push</code></pre></div>
-</section><section id="sumário" class="slide level2">
-<h2>Sumário</h2>
-<dl>
-<dt><code>clone</code></dt>
-<dd><p>copiar um repositório remoto</p>
-</dd>
-<dt><code>add</code></dt>
-<dd><p>adicionar ficheiros alterados à àrea de estágio</p>
-</dd>
-<dt><code>commit</code></dt>
-<dd><p>registar alterações no repositório local</p>
-</dd>
-<dt><code>push</code></dt>
-<dd><p>enviar alterações ao repositório remoto</p>
-</dd>
-<dt><code>pull</code></dt>
-<dd><p>pedir alterações do repositório remoto</p>
-</dd>
-</dl>
 </section>
 <section id="recomendações" class="titleslide slide level1"><h1>Recomendações</h1></section><section id="escolher-commits" class="slide level2">
 <h2>Escolher <em>commits</em></h2>
@@ -487,19 +477,54 @@ Registamos um novo <em>commit</em> de resolução:</p>
 </section>
 <section id="extras" class="titleslide slide level1"><h1>Extras</h1></section><section id="mudar-nomes" class="slide level2">
 <h2>Mudar nomes</h2>
-<p>P: Como fazer para mudar o nome de um ficheiro ou diretório?</p>
-<p>R: Pode usar <code>git mv</code> para mudar o nome de um ficheiro preservando a história de alterações.</p>
+<p>Como fazer para mudar o nome de um ficheiro ou diretório?</p>
+<h3 id="solução">Solução</h3>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> mv <span class="op">&lt;</span>nome-atual<span class="op">&gt;</span> <span class="op">&lt;</span>nome-novo<span class="op">&gt;</span></code></pre></div>
 </section><section id="desfazer-modificações" class="slide level2">
 <h2>Desfazer modificações</h2>
-<p>P: Editei um ficheiro na área de trabalho, mas agora quero desfazer essas alterações.</p>
-<p>R: Pode usar <code>git checkout</code> para reverter modificações de volta para o estado registado no último <em>commit</em>.</p>
+<p>Editei um ficheiro na área de trabalho, mas agora quero desfazer essas alterações.</p>
+<h3 id="solução-1">Solução</h3>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> checkout -- <span class="op">&lt;</span>ficheiro<span class="op">&gt;</span></code></pre></div>
+<p>(Reverte modificações para o estado registado no último <em>commit</em>.)</p>
 </section><section id="desfazer-stagging" class="slide level2">
 <h2>Desfazer <em>stagging</em></h2>
-<p>P: Adicionei um ficheiro à área de estágio, mas afinal não quero incluí-lo no próximo <em>commit</em>.</p>
-<p>R: Pode usar <code>git reset HEAD</code> para remover um ficheiro da área de estágio.</p>
+<p>Adicionei um ficheiro à área de estágio, mas afinal não quero incluí-lo no próximo <em>commit</em>.</p>
+<h3 id="solução-2">Solução</h3>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> reset HEAD <span class="op">&lt;</span>ficheiro<span class="op">&gt;</span></code></pre></div>
+</section><section id="sumário-de-comandos" class="slide level2">
+<h2>Sumário de comandos</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>init</code></td>
+<td style="text-align: right;">inicializar um repositório</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>clone</code></td>
+<td style="text-align: right;">copiar um repositório remoto</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>add</code></td>
+<td style="text-align: right;">adicionar ficheiros alterados à àrea de estágio</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>commit</code></td>
+<td style="text-align: right;">registar alterações no repositório local</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>checkout</code></td>
+<td style="text-align: right;">reverter para um <em>snapshot</em> específico</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>push</code></td>
+<td style="text-align: right;">enviar alterações ao repositório remoto</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>pull</code></td>
+<td style="text-align: right;">puxar alterações do repositório remoto</td>
+</tr>
+</tbody>
+</table>
 </section><section id="mais-informação" class="slide level2">
 <h2>Mais informação</h2>
 <ul>
@@ -508,10 +533,10 @@ Registamos um novo <em>commit</em> de resolução:</p>
 <li><a href="https://www.atlassian.com/git/tutorials/">Atlassian git tutorial</a></li>
 <li><a href="http://gitimmersion.com/">Git immersion</a></li>
 </ul>
-</section><section id="section" class="slide level2">
-<h2></h2>
+</section><section id="obrigado" class="slide level2">
+<h2>Obrigado!</h2>
 <p align="center">
-<img src="images/in-case-of-fire.png" width=600/>
+<img src="images/in-case-of-fire.png" width=500/>
 </p>
 </section>
 <!-- {{{{ dzslides core
