@@ -5,9 +5,21 @@ author: Pedro Vasconcelos, DCC/FCUP
 date: Abril 2017
 ...
 
-# Controlo de Versões
+# 
 
-## Controlo de Versões
+## Esta apresentação
+
+* Introdução ao uso do sistema de controlo de versões *Git*
+* Direcionado para estudantes dos primeiros anos
+* Necessita apenas de ferramentas básicas
+       - editor de texto, *shell*,  *browser web*
+	   - em sistemas Unix, Linux, MacOS(?)
+* Slides: [https://github.com/pbv/gitprimer](https://github.com/pbv/gitprimer)
+
+
+# Conceitos
+
+## Sistemas de controlo de versões
 
 Sistemas de controlo de versões (VCS) são ferramentas para:
 
@@ -15,11 +27,11 @@ Sistemas de controlo de versões (VCS) são ferramentas para:
 * registar alterações durante o desenvolvimento
 * desfazer alterações ou recuperar versões anteriores
 * sincronizar  diferentes computadores
-* colaborar com programadores (locais ou à distância)
+* colaborar com programadores 
 * separar "troncos" de desenvolvimento (e.g.\ produção/desenvolvimento)
 
 
-## Sistemas Locais
+## Sistemas locais
 
 Os primeiros *VCS* registavam modificações de ficheiros apenas numa
 base de dados local.
@@ -28,14 +40,14 @@ base de dados local.
 
 Exemplos: *SCCS*, *RCS*.
 
-## Sistemas Locais (2)
+## Sistemas locais (2)
 
 <p align="center">
 ![image](images/local-version-control-600.png)
 </p>
 
 
-## Sistemas Locais (3)
+## Sistemas locais (3)
 
 Permitem:
 
@@ -48,7 +60,7 @@ Não permitem:
 * colaboração entre programadores.
 
 
-## Sistemas Centralizados
+## Sistemas centralizados
 
 Os *sistemas centralizados* registam alterações numa base de dados
 central; todos os clientes utilizam a mesma base de dados.
@@ -57,7 +69,7 @@ central; todos os clientes utilizam a mesma base de dados.
 
 Exemplos: *CVS*, *SVN*
 
-## Sistemas Centralizados (2)
+## Sistemas centralizados (2)
 
 <p align="center">
 ![image](images/centralized-800px.png)
@@ -65,7 +77,7 @@ Exemplos: *CVS*, *SVN*
 
 
 
-## Sistemas Centralizados (3)
+## Sistemas centralizados (3)
 
 Vantagens sobre os sistemas locais:
 
@@ -80,7 +92,7 @@ Limitações:
 
 
 
-## Sistemas Distribuídos
+## Sistemas distribuídos
 
 Nos sistemas distribuidos cada cópia do repositório mantém 
 também a *base de dados de modificações*.
@@ -90,14 +102,14 @@ também a *base de dados de modificações*.
 Exemplos: *GNU arch*, *Darcs*, *Mercurial*, *Git*.
 
 
-## Sistemas Distribuídos (2)
+## Sistemas distribuídos (2)
 
 <p align="center">
 ![image](images/distributed-600.png)
 </p>
 
 
-## Sistemas Distribuidos (3)
+## Sistemas distribuidos (3)
 
 Vantagens sobre sistemas centralizados:
 
@@ -158,9 +170,13 @@ Desvantagens:
 
 ## Integridade 
 
-* O *Git* associa  um  *hash* a cada *commit*
-      - 40 carateres hexadecimais, e.g.
-		`34ac2a6552252987aa493b52f8696cd6d3b00373`
+* O *Git* associa um *hash* (40 carateres hexadecimais) a cada
+  *snapshot*, e.g.:
+
+~~~
+  34ac2a6552252987aa493b52f8696cd6d3b00373
+~~~
+
 * Garante que o conteúdo dos ficheiros não foi corrompido
 * Serve também para identificar cada *snapshot* 
 
@@ -171,7 +187,7 @@ Desvantagens:
 
 
 
-## Repositórios Locais e Remotos
+## Repositórios locais e remotos
 
 * Quase todas as operações com *Git* são **locais**:
        - inicializar repositórios
@@ -185,7 +201,7 @@ Desvantagens:
   noutro computador na rede!
 
 
-## *Hosting* de Repositórios
+## *Hosting* de repositórios
 
 GitHub
 
@@ -240,7 +256,7 @@ git config --list
 ```
 
 
-## Inicializar um Repositório 
+## Inicializar um repositório 
 
 ```bash
 mkdir my-project
@@ -276,7 +292,7 @@ git add src/foo.c src/bar.h README.txt
 Os ficheiros ficam na *área de estágio*; temos de fazer 
 *commit* para registar na base de dados do *Git*.
 
-## Primeiro *Commit*
+## Primeiro *commit*
 
 ```bash
 git commit -m "initialized repository"
@@ -374,8 +390,8 @@ git log --since=01/04/2017 --author="Pedro"
 ## *Checkout*
 
 
-O *Git* permite "viajar no tempo" do desenvolvimento do
-nosso projeto.
+O *Git* permite "viajar no tempo" de desenvolvimento do
+projeto.
 
 \
 
@@ -503,8 +519,8 @@ Este comando descarrega *commits* no repositório remoto feitos desde a
 
 <img src="images/typical-merge.png" height=400 align="right"/>
 
-* Para juntar desenvolvimento divergente entre dois
- repositórios, o *Git* efetua uma operação de *merge*
+* Juntar desenvolvimento divergente: operação
+  de *merge*
 * O *merge* introduz num novo *snapshot* que unifica
   os ramos divergentes
 * O *Git* tenta fazer *merge* automático sempre que executamos
@@ -514,21 +530,19 @@ Este comando descarrega *commits* no repositório remoto feitos desde a
 
 ## Conflitos
 
-Se dois *commits* divergentes modificarem o mesma
-o mesmo ficheiro o *Git* pode sinalizar um **conflito**.
+Se dois *commits* separados modificarem 
+um mesmo ficheiro o *Git* pode sinalizar um **conflito**.
 
 \
 
 O conflito é detetado quando tentarmos sincronizar com
 um repositório remoto (`pull` ou `push`).
 
-## Resolver Conflitos
+## Resolver conflitos
 
-* O *Git* não resolve o conflito sozinho
-* Para resolver devemos:
-      1. editar os ficheiros afetados e juntar as alterações
-      2. registar um novo *commit* de resolução
-      3. efetuar `push` para o repositório remoto
+1. Editar os ficheiros afetados e juntar as alterações
+2. Registar um novo *commit* de resolução
+3. Efetuar `push` para o repositório remoto
 
 
 ## Exemplo
@@ -553,7 +567,7 @@ Entre `<<<<<<` e  `=====` é a **modificação local**.
 
 Entre `======` e `>>>>>>`  é a **modificação remota**.
 
-## Resolver o conflito
+## Resolver o conflito (1)
 
 Editamos `file.txt` e juntamos as modificações:
 
@@ -562,16 +576,16 @@ Hello world
 Goodbye
 ~~~
 
-\
+## Resolver o conflito (2)
 
-Registamos um novo *commit* de resolução:
+Registamos um  *commit* de resolução:
 
 ~~~bash
 git add file.txt
 git commit -m "resolver conflito"
 ~~~
 
-## Resolver o conflito (cont.)
+## Resolver o conflito (3)
 
 Por fim, fazemos o `push` da resolução
 para o repositório remoto.
@@ -579,31 +593,6 @@ para o repositório remoto.
 ~~~bash
 git push
 ~~~
-
-
-## Sumário
-
-
-`clone`
-
-:    copiar um repositório remoto
-
-`add`
-
-:    adicionar ficheiros alterados à àrea de estágio
-
-
-`commit`
-
-:     registar alterações no repositório local
-
-`push`
-
-:     enviar alterações ao repositório remoto
-
-`pull`
-
-:     pedir alterações do repositório remoto
 
 
 
@@ -644,11 +633,10 @@ git commit -m "acrescenta contagem de pontuação"
 
 ## Mudar nomes
 
-P: Como fazer para mudar o nome de um ficheiro
+Como fazer para mudar o nome de um ficheiro
 ou diretório?
 
-R: Pode usar `git mv` para mudar o nome de um
-ficheiro preservando a história de alterações.
+### Solução
 
 ~~~bash
 git mv <nome-atual> <nome-novo>
@@ -656,30 +644,40 @@ git mv <nome-atual> <nome-novo>
 
 ## Desfazer modificações
 
-P: Editei um ficheiro na área de trabalho,
+Editei um ficheiro na área de trabalho,
 mas agora quero desfazer essas alterações.
 
-
-R: Pode usar `git checkout` para reverter modificações de volta
-para o estado registado no último  *commit*.
-
+### Solução
 
 ~~~bash
 git checkout -- <ficheiro>
 ~~~
 
+(Reverte modificações para o estado registado no último  *commit*.)
+
+
 ## Desfazer *stagging*
 
-P: Adicionei um ficheiro à área de estágio, mas
+Adicionei um ficheiro à área de estágio, mas
 afinal não quero incluí-lo no próximo  *commit*.
 
-
-R: Pode usar `git reset HEAD` para remover um ficheiro da área de estágio.
+### Solução
 
 ~~~bash
 git reset HEAD <ficheiro>
 ~~~
 
+## Sumário de comandos
+
+--------  -------------------------------------------
+`init`                     inicializar um repositório
+`clone`     copiar um repositório remoto
+`add`       adicionar ficheiros alterados à àrea de estágio
+`commit`    registar alterações no repositório local
+`checkout`  reverter para um *snapshot* específico
+`push`      enviar alterações ao repositório remoto
+`pull`      puxar alterações do repositório remoto
+--------   --------------------------------------------
 
 
 ## Mais informação
@@ -689,9 +687,8 @@ git reset HEAD <ficheiro>
 * [Atlassian git tutorial](https://www.atlassian.com/git/tutorials/)
 * [Git immersion](http://gitimmersion.com/)
 
-
-## 
+## Obrigado!
 
 <p align="center">
-<img src="images/in-case-of-fire.png" width=600/>
+<img src="images/in-case-of-fire.png" width=500/>
 </p>
