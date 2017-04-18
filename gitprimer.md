@@ -12,9 +12,13 @@ date: Abril 2017
 * Direcionado para estudantes dos primeiros anos
 * Necessita apenas de ferramentas básicas
        - editor de texto, *shell*,  *browser web*
-	   - em sistemas Unix, Linux, MacOS(?)
-* Slides: [https://github.com/pbv/gitprimer](https://github.com/pbv/gitprimer)
+	   - em sistemas Unix, Linux, MacOS
 
+Slides:
+
+~~~bash
+git clone https://github.com/pbv/gitprimer
+~~~
 
 # Conceitos
 
@@ -404,7 +408,6 @@ Listar todos os *snapshots* (mais recente primeiro):
 
 ~~~bash
 git log --all --oneline
-  # um commit por linha, hash curto
 ~~~
 
 > ~~~
@@ -416,7 +419,7 @@ git log --all --oneline
 ~~~bash
 # reverter à primeira versão
 git checkout 432bffa
-# ver ficheiros, etc.
+
 # avançar até à última versão
 git checkout 7fd2d99
 ~~~
@@ -447,11 +450,13 @@ Se o repositório remoto já foi inicializado:
 git clone <url-remoto>
 ~~~
 
-* O accesso será tipicamente por HTTPS ou SSH
+* Accesso por HTTPS ou SSH
 * Obtemos uma cópia completa podemos editar livremente
 * Cria um repositório local num novo
   diretório com nome do projeto
 
+
+<!--
 ## Associar um repositório remoto
 
 Se o repositório local já foi inicializado:
@@ -461,7 +466,7 @@ cd my-project
 git remote add origin <url-remoto>
 git push -u origin master
 ~~~
-
+-->
 
 ## Modificar
 
@@ -593,33 +598,26 @@ git push
 ~~~
 
 
-
-
-
-
 # Recomendações
 
 ## Escolher *commits*
 
 * Use `git add` para juntar alterações relacionadas 
 * Componha *boas mensagens*:
-	   - não é útil listar os ficheiros alterados
+	   - não é útil dizer quais os ficheiros alterados
        - explicar o **sentido** do *commit*
 
-## Exemplos de más mensagens
+## Exemplos 
+
+### Más mensagens
 
 ~~~bash
-git commit -m "últimas alterações."
-git commit -m "alterações do Pedro."
-git commit -m "adiciona o Jogador.java."
-git commit -m "alterações no Jogador.java."
-git commit -m "adiciona cenas."
-git commit -m "revision"
-git commit -m "blablabla"
-git commit -m "WTFWTFWTF"
+git commit -m "revisão"
+git commit -m "últimas alterações"
+git commit -m "alterações do Pedro"
 ~~~
 
-## Exemplos de boas mensagens
+### Boas mensagens
 
 ~~~bash
 git commit -m "resolve o bug do prémio"
@@ -665,17 +663,17 @@ afinal não quero incluí-lo no próximo  *commit*.
 git reset HEAD <ficheiro>
 ~~~
 
-## Sumário de comandos
+## Sumário 
 
---------  -------------------------------------------
-`init`                     inicializar um repositório
-`clone`     copiar um repositório remoto
-`add`       adicionar ficheiros alterados à àrea de estágio
-`commit`    registar alterações no repositório local
-`checkout`  reverter para um *snapshot* específico
-`push`      enviar alterações ao repositório remoto
-`pull`      puxar alterações do repositório remoto
---------   --------------------------------------------
+------------  -------------------------------------------
+`init`                         inicializar um repositório
+`clone`        copiar um repositório remoto
+`add`          adicionar ficheiros à àrea de estágio
+`commit`       registar alterações no repositório local
+`checkout`     reverter para um *snapshot* específico
+`push`         enviar alterações ao repositório remoto
+`pull`         puxar alterações do repositório remoto
+------------   --------------------------------------------
 
 
 ## Mais informação
@@ -685,7 +683,7 @@ git reset HEAD <ficheiro>
 * [Atlassian git tutorial](https://www.atlassian.com/git/tutorials/)
 * [Git immersion](http://gitimmersion.com/)
 
-## Obrigado!
+## 
 
 <p align="center">
 <img src="images/in-case-of-fire.png" width=500/>

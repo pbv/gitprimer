@@ -59,10 +59,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>Necessita apenas de ferramentas básicas
 <ul>
 <li>editor de texto, <em>shell</em>, <em>browser web</em></li>
-<li>em sistemas Unix, Linux, MacOS(?)</li>
+<li>em sistemas Unix, Linux, MacOS</li>
 </ul></li>
-<li>Slides: <a href="https://github.com/pbv/gitprimer" class="uri">https://github.com/pbv/gitprimer</a></li>
 </ul>
+<p>Slides:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> clone https://github.com/pbv/gitprimer</code></pre></div>
 </section>
 <section id="conceitos" class="titleslide slide level1"><h1>Conceitos</h1></section><section id="sistemas-de-controlo-de-versões" class="slide level2">
 <h2>Sistemas de controlo de versões</h2>
@@ -342,8 +343,7 @@ Usamos <code>git checkout</code> para reverter o diretório de trabalho para <em
 </section><section id="exemplo" class="slide level2">
 <h2>Exemplo</h2>
 <p>Listar todos os <em>snapshots</em> (mais recente primeiro):</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> log --all --oneline
-  <span class="co"># um commit por linha, hash curto</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> log --all --oneline</code></pre></div>
 <blockquote>
 <pre><code>7fd2d99 third commit
 7cf2ce7 second commit
@@ -351,7 +351,7 @@ Usamos <code>git checkout</code> para reverter o diretório de trabalho para <em
 </blockquote>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># reverter à primeira versão</span>
 <span class="fu">git</span> checkout 432bffa
-<span class="co"># ver ficheiros, etc.</span>
+
 <span class="co"># avançar até à última versão</span>
 <span class="fu">git</span> checkout 7fd2d99</code></pre></div>
 </section>
@@ -365,16 +365,21 @@ Um <em>repositório remoto</em> é apenas um diretório <em>Git</em> que está l
 <p>Se o repositório remoto já foi inicializado:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> clone <span class="op">&lt;</span>url-remoto<span class="op">&gt;</span></code></pre></div>
 <ul>
-<li>O accesso será tipicamente por HTTPS ou SSH</li>
+<li>Accesso por HTTPS ou SSH</li>
 <li>Obtemos uma cópia completa podemos editar livremente</li>
 <li>Cria um repositório local num novo diretório com nome do projeto</li>
 </ul>
-</section><section id="associar-um-repositório-remoto" class="slide level2">
-<h2>Associar um repositório remoto</h2>
-<p>Se o repositório local já foi inicializado:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="bu">cd</span> my-project
-<span class="fu">git</span> remote add origin <span class="op">&lt;</span>url-remoto<span class="op">&gt;</span>
-<span class="fu">git</span> push -u origin master</code></pre></div>
+<!--
+## Associar um repositório remoto
+
+Se o repositório local já foi inicializado:
+
+~~~bash
+cd my-project
+git remote add origin <url-remoto>
+git push -u origin master
+~~~
+-->
 </section><section id="modificar" class="slide level2">
 <h2>Modificar</h2>
 <p>Registamos alterações no repositório local (tal como anteriormente).</p>
@@ -459,18 +464,13 @@ Goodbye</code></pre>
 <li>explicar o <strong>sentido</strong> do <em>commit</em></li>
 </ul></li>
 </ul>
-</section><section id="exemplos-de-más-mensagens" class="slide level2">
-<h2>Exemplos de más mensagens</h2>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> commit -m <span class="st">&quot;últimas alterações.&quot;</span>
-<span class="fu">git</span> commit -m <span class="st">&quot;alterações do Pedro.&quot;</span>
-<span class="fu">git</span> commit -m <span class="st">&quot;adiciona o Jogador.java.&quot;</span>
-<span class="fu">git</span> commit -m <span class="st">&quot;alterações no Jogador.java.&quot;</span>
-<span class="fu">git</span> commit -m <span class="st">&quot;adiciona cenas.&quot;</span>
-<span class="fu">git</span> commit -m <span class="st">&quot;revision&quot;</span>
-<span class="fu">git</span> commit -m <span class="st">&quot;blablabla&quot;</span>
-<span class="fu">git</span> commit -m <span class="st">&quot;WTFWTFWTF&quot;</span></code></pre></div>
-</section><section id="exemplos-de-boas-mensagens" class="slide level2">
-<h2>Exemplos de boas mensagens</h2>
+</section><section id="exemplos" class="slide level2">
+<h2>Exemplos</h2>
+<h3 id="más-mensagens">Más mensagens</h3>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> commit -m <span class="st">&quot;revisão&quot;</span>
+<span class="fu">git</span> commit -m <span class="st">&quot;últimas alterações&quot;</span>
+<span class="fu">git</span> commit -m <span class="st">&quot;alterações do Pedro&quot;</span></code></pre></div>
+<h3 id="boas-mensagens">Boas mensagens</h3>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> commit -m <span class="st">&quot;resolve o bug do prémio&quot;</span>
 <span class="fu">git</span> commit -m <span class="st">&quot;remove duplicação de código&quot;</span>
 <span class="fu">git</span> commit -m <span class="st">&quot;acrescenta contagem de pontuação&quot;</span></code></pre></div>
@@ -505,7 +505,7 @@ Goodbye</code></pre>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>add</code></td>
-<td style="text-align: right;">adicionar ficheiros alterados à àrea de estágio</td>
+<td style="text-align: right;">adicionar ficheiros à àrea de estágio</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>commit</code></td>
@@ -533,8 +533,8 @@ Goodbye</code></pre>
 <li><a href="https://www.atlassian.com/git/tutorials/">Atlassian git tutorial</a></li>
 <li><a href="http://gitimmersion.com/">Git immersion</a></li>
 </ul>
-</section><section id="obrigado" class="slide level2">
-<h2>Obrigado!</h2>
+</section><section id="section-2" class="slide level2">
+<h2></h2>
 <p align="center">
 <img src="images/in-case-of-fire.png" width=500/>
 </p>
