@@ -4,43 +4,74 @@
   <meta name="generator" content="pandoc">
   <meta name="author" content="Pedro Vasconcelos, DCC/FCUP">
   <title>Introdução ao Git</title>
-  <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="css/dzslides.css">
 </head>
@@ -48,107 +79,109 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <section class="title">
   <h1 class="title">Introdução ao <em>Git</em></h1>
   <footer>
-    <span class="author">Pedro Vasconcelos, DCC/FCUP</span> · <span class="date">Abril 2017</span>
+    <span class="author">Pedro Vasconcelos, DCC/FCUP</span> · <span class="date">setembro 2020</span>
   </footer>
 </section>
-<section id="introdução-ao-git" class="titleslide slide level1"><h1>Introdução ao <em>Git</em></h1></section><section id="esta-apresentação" class="slide level2">
+<section id="introdução-ao-git" class="title-slide slide level1"><h1>Introdução ao <em>Git</em></h1></section><section id="esta-apresentação" class="slide level2">
 <h2>Esta apresentação</h2>
 <ul>
 <li>Introdução ao uso do sistema de controlo de versões <em>Git</em></li>
-<li>Direcionado para estudantes dos primeiros anos</li>
-<li>Necessita apenas de ferramentas básicas
+<li>Direcionado para estudantes de primeiros anos</li>
+<li>Vamos usar:
 <ul>
+<li>sistema operativo GNU/Linux ou MacOs</li>
 <li>editor de texto, <em>shell</em>, <em>browser web</em></li>
-<li>em sistemas Unix, Linux, MacOS</li>
 </ul></li>
 </ul>
 <p>Slides:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> clone https://github.com/pbv/gitprimer</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1">$ <span class="fu">git</span> clone https://github.com/pbv/gitprimer</a></code></pre></div>
 </section>
-<section id="conceitos" class="titleslide slide level1"><h1>Conceitos</h1></section><section id="sistemas-de-controlo-de-versões" class="slide level2">
-<h2>Sistemas de controlo de versões</h2>
-<p>Sistemas de controlo de versões (VCS) são ferramentas para:</p>
+<section id="conceitos" class="title-slide slide level1"><h1>Conceitos</h1></section><section id="sistemas-de-controlo-de-versões-vcs" class="slide level2">
+<h2>Sistemas de Controlo de Versões (VCS)</h2>
+<p>Ferramentas para:</p>
 <ul>
 <li>arquivar ficheiros de um projeto (código-fonte e outros)</li>
 <li>registar alterações durante o desenvolvimento</li>
 <li>desfazer alterações ou recuperar versões anteriores</li>
 <li>sincronizar diferentes computadores</li>
-<li>colaborar com programadores</li>
-<li>separar &quot;troncos&quot; de desenvolvimento (e.g. produção/desenvolvimento)</li>
+<li>colaborar com outros programadores</li>
+<li>separar “troncos” de desenvolvimento<br />
+(ex: produção/desenvolvimento)</li>
 </ul>
-</section><section id="sistemas-locais" class="slide level2">
-<h2>Sistemas locais</h2>
-<p>Os primeiros <em>VCS</em> registavam modificações de ficheiros apenas numa base de dados local.</p>
-<p><br />
-Exemplos: <em>SCCS</em>, <em>RCS</em>.</p>
-</section><section id="sistemas-locais-2" class="slide level2">
-<h2>Sistemas locais (2)</h2>
+<!-- 
+
+## Sistemas locais
+
+* Os primeiros *VCS* 
+* Registavam modificações numa base de dados local
+* Exemplos: *SCCS*, *RCS*.
+
 <p align="center">
-<img src="images/local-version-control-600.png" alt="image" />
+<img width="300px" src="images/local-version-control-600.png">
 </p>
-</section><section id="sistemas-locais-3" class="slide level2">
-<h2>Sistemas locais (3)</h2>
-<p>Permitem:</p>
-<ul>
-<li>registar e desfazer edições;</li>
-<li>recuperar versões anteriores.</li>
-</ul>
-<p>Não permitem:</p>
-<ul>
-<li>sincronização entre computadores;</li>
-<li>colaboração entre programadores.</li>
-</ul>
-</section><section id="sistemas-centralizados" class="slide level2">
-<h2>Sistemas centralizados</h2>
-<p>Os <em>sistemas centralizados</em> registam alterações numa base de dados central; todos os clientes utilizam a mesma base de dados.</p>
-<p><br />
-Exemplos: <em>CVS</em>, <em>SVN</em></p>
-</section><section id="sistemas-centralizados-2" class="slide level2">
-<h2>Sistemas centralizados (2)</h2>
+
+
+## Sistemas locais (2)
+
+Permitem:
+
+* registar e desfazer edições;
+* recuperar versões anteriores.
+
+Não permitem:
+
+* sincronização entre computadores;
+* colaboração entre programadores.
+
+
+## Sistemas centralizados
+
+* Registam alterações numa base de dados central.
+* Exemplos: *CVS*, *SVN*
+
 <p align="center">
-<img src="images/centralized-800px.png" alt="image" />
+<img width="350px" src="images/centralized-800px.png">
 </p>
-</section><section id="sistemas-centralizados-3" class="slide level2">
-<h2>Sistemas centralizados (3)</h2>
-<p>Vantagens sobre os sistemas locais:</p>
-<ul>
-<li>sincronização entre computadores</li>
-<li>colaboração entre programadores</li>
-</ul>
-<p>Limitações:</p>
-<ul>
-<li>não permitem trabalhar <em>off-line</em> (é necessário acesso ao servidor para registar alterações)</li>
-<li>o servidor constitui um <em>ponto crítico de falha</em></li>
-</ul>
-</section><section id="sistemas-distribuídos" class="slide level2">
-<h2>Sistemas distribuídos</h2>
-<p>Nos sistemas distribuidos cada cópia do repositório mantém também a <em>base de dados de modificações</em>.</p>
-<p><br />
-Exemplos: <em>GNU arch</em>, <em>Darcs</em>, <em>Mercurial</em>, <em>Git</em>.</p>
-</section><section id="sistemas-distribuídos-2" class="slide level2">
-<h2>Sistemas distribuídos (2)</h2>
+
+
+## Sistemas centralizados (2)
+
+Vantagens sobre os sistemas locais:
+
+* sincronização entre computadores
+* colaboração entre programadores
+
+Limitações:
+
+* não permitem trabalhar *off-line*
+  (é necessário acesso ao servidor para registar alterações)
+* o servidor constitui um *ponto crítico de falha*
+
+-->
+</section><section id="vcs-distribuídos" class="slide level2">
+<h2>VCS distribuídos</h2>
 <p align="center">
-<img src="images/distributed-600.png" alt="image" />
+<img width="400px" src="images/distributed-600.png">
 </p>
-</section><section id="sistemas-distribuidos-3" class="slide level2">
-<h2>Sistemas distribuidos (3)</h2>
-<p>Vantagens sobre sistemas centralizados:</p>
+</section><section id="vcs-distribuidos-2" class="slide level2">
+<h2>VCS distribuidos (2)</h2>
+<p>Vantagens:</p>
 <ul>
-<li>todas as cópias do repositório contêm a historia completa</li>
-<li>permitem registar alterações mesmo sem acesso a rede</li>
-<li>não há um ponto crítico de falha: qualquer cópia do repositório contém a história completa</li>
-<li>facilitam a introdução de mudanças experimentais separadas das estáveis (&quot;<em>branching</em>&quot;)</li>
+<li>Cada cópia do repositório contém a historia completa</li>
+<li>Permitem registar modificações mesmo sem acesso a rede</li>
+<li>Evitam um ponto crítico para falhas</li>
+<li>Facilitam a introdução de <em>branches</em> experimentais</li>
 </ul>
 <p>Desvantagens:</p>
 <ul>
-<li>necessitam de mais espaço em disco</li>
-<li>a utilização pode ser mais complexa</li>
+<li>Necessitam de mais espaço em disco</li>
+<li>A sua utilização pode ser um pouco mais complexa</li>
 </ul>
 </section>
-<section id="section" class="titleslide slide level1"><h1><img src="images/Git-Logo-2Color.png" width=300/></h1></section><section id="section-1" class="slide level2">
-<h2><img src="images/Git-Logo-2Color.png" width=250/></h2>
+<section id="section" class="title-slide slide level1"><h1><img src="images/Git-Logo-2Color.png" width=300/></h1></section><section id="section-1" class="slide level2">
+<h2><img src="images/Git-Logo-2Color.png" width=200/></h2>
 <ul>
-<li>Um sistema de controlo de versões distribuído</li>
+<li>Um VCS distribuído</li>
 <li>Desenvolvido desde 2005 para o código do <em>kernel</em> Linux</li>
 <li>Muito usado em projetos <em>open-source</em></li>
 <li>Características:
@@ -156,17 +189,17 @@ Exemplos: <em>GNU arch</em>, <em>Darcs</em>, <em>Mercurial</em>, <em>Git</em>.</
 <li>conceção simples mas poderosa</li>
 <li>adequado a projectos grandes (muitos ficheiros e história longa)</li>
 <li>eficiente em espaço e recursos computacionais</li>
-<li>suporte para desenvolvimento não-linear (&quot;<em>branching</em>&quot;)</li>
+<li>suporte para desenvolvimento não-linear (“<em>branching</em>”)</li>
 </ul></li>
 </ul>
-</section><section id="porquê-usar" class="slide level2">
-<h2>Porquê usar?</h2>
+</section><section id="porquê-usar-git" class="slide level2">
+<h2>Porquê usar <em>Git</em>?</h2>
 <ul>
-<li>Sincronização entre computador pessoal e da universidade
+<li>Sincronização de trabalhos entre computador pessoal e da universidade
 <ul>
-<li>diga adeus às <em>pen drives</em></li>
+<li>diga adeus às <em>pen drives</em> ou <em>Dropbox</em></li>
 </ul></li>
-<li>Permite experimentar modificações sem medo
+<li>Permite experimentar modificações sem receios
 <ul>
 <li>podemos reverter facilmente se necessário</li>
 </ul></li>
@@ -178,12 +211,12 @@ Exemplos: <em>GNU arch</em>, <em>Darcs</em>, <em>Mercurial</em>, <em>Git</em>.</
 <h2>Como funciona</h2>
 <ul>
 <li>Cada repositório consiste de um conjunto de ficheiros e sub-diretórios</li>
-<li>Quando registamos uma modificação (<em>commit</em>), o <em>Git</em> guarda um <em>snapshot</em> de <em>todos</em> os ficheiros</li>
+<li>Quando registamos uma modificação (<em>commit</em>), o <em>Git</em> guarda um <em>snapshot</em> de todos os ficheiros</li>
+<li>Ficheiros inalterados são guardados como <em>referências</em> ao <em>commit</em> anterior</li>
 </ul>
 <p align="center">
-<img src="images/snapshots.png" width=600/>
+<img src="images/snapshots.png" width="480px"/>
 </p>
-<p>(NB: ficheiros inalterados são guardados como <em>referências</em>)</p>
 </section><section id="integridade" class="slide level2">
 <h2>Integridade</h2>
 <ul>
@@ -195,7 +228,7 @@ Exemplos: <em>GNU arch</em>, <em>Darcs</em>, <em>Mercurial</em>, <em>Git</em>.</
 <li>Serve também para identificar cada <em>snapshot</em></li>
 </ul>
 <p align="center">
-<img src="images/commit-hashes.png" alt="image" />
+<img src="images/commit-hashes.png" width="450px">
 </p>
 </section><section id="repositórios-locais-e-remotos" class="slide level2">
 <h2>Repositórios locais e remotos</h2>
@@ -206,69 +239,72 @@ Exemplos: <em>GNU arch</em>, <em>Darcs</em>, <em>Mercurial</em>, <em>Git</em>.</
 <li>acrescentar/remover ficheiros</li>
 <li>registar modificações (<em>commit</em>)</li>
 <li>listar a história</li>
-<li>...</li>
 </ul></li>
-<li>Mas o <em>Git</em> permite também <em>sincronizar</em> de/para repositórios remotos</li>
+<li>Mas o <em>Git</em> permite também <em>sincronizar</em> com repositórios remotos</li>
 <li>Um repositório remoto é apenas um diretório <em>Git</em> noutro computador na rede!</li>
 </ul>
 </section><section id="hosting-de-repositórios" class="slide level2">
 <h2><em>Hosting</em> de repositórios</h2>
 <dl>
 <dt>GitHub</dt>
-<dd><p><a href="https://github.com/" class="uri">https://github.com/</a></p>
+<dd><p><a href="https://github.com/">https://github.com/</a></p>
 </dd>
 <dt>GitLab</dt>
-<dd><p><a href="https://gitlab.com/" class="uri">https://gitlab.com/</a></p>
+<dd><p><a href="https://gitlab.com/">https://gitlab.com/</a></p>
 </dd>
 </dl>
 <p><br />
-Necessitam de registo, mas permitem criar contas gratuitas.</p>
+</p>
+<p>Necessitam de registo, mas permitem criar contas gratuitas.</p>
 </section>
-<section id="utilização" class="titleslide slide level1"><h1>Utilização</h1></section><section id="comando-git" class="slide level2">
+<section id="utilização" class="title-slide slide level1"><h1>Utilização</h1></section><section id="comando-git" class="slide level2">
 <h2>Comando <code>git</code></h2>
 <p>Utilizamos o comando <code>git</code> para as várias operações:</p>
 <blockquote>
-<p><code>git</code> operação arg1 arg2 ...</p>
+<p><code>git</code> operação arg1 arg2 …</p>
 </blockquote>
 <p>Exemplo:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> log --oneline
-<span class="fu">git</span> help</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" title="1">$ <span class="fu">git</span> log --oneline</a>
+<a class="sourceLine" id="cb3-2" title="2">$ <span class="fu">git</span> help</a></code></pre></div>
 </section><section id="configuração-inicial" class="slide level2">
 <h2>Configuração inicial</h2>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> config --global user.name <span class="st">&quot;My name&quot;</span>
-<span class="fu">git</span> config --global user.email my@email.domain</code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" title="1">$ <span class="fu">git</span> config --global user.name <span class="st">&quot;My name&quot;</span></a>
+<a class="sourceLine" id="cb4-2" title="2">$ <span class="fu">git</span> config --global user.email my@email.domain</a></code></pre></div>
 <p><br />
-Configurar editor de texto (opcional):</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> config --global core.editor emacs</code></pre></div>
-<p><br />
-Listar configurações:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> config --list</code></pre></div>
-</section><section id="inicializar-um-repositório" class="slide level2">
-<h2>Inicializar um repositório</h2>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">mkdir</span> my-project
-<span class="bu">cd</span> my-project
-<span class="fu">git</span> init</code></pre></div>
+</p>
+<p>Listar as configurações:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb5-1" title="1">$ <span class="fu">git</span> config --list</a></code></pre></div>
+</section><section id="criar-um-novo-repositório" class="slide level2">
+<h2>Criar um novo repositório</h2>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb6-1" title="1">$ <span class="fu">mkdir</span> my-project</a>
+<a class="sourceLine" id="cb6-2" title="2">$ <span class="bu">cd</span> my-project</a>
+<a class="sourceLine" id="cb6-3" title="3">$ <span class="fu">git</span> init</a></code></pre></div>
 <ul>
-<li>cria um diretório <code>my-project/.git</code> para meta-dados</li>
-<li>o repositório está inicialmente <em>vazio</em>; devemos adicionar ficheiros e/ou sub-diretórios</li>
+<li>Cria um diretório <code>my-project/.git</code> para meta-dados</li>
+<li>O repositório está inicialmente <em>vazio</em></li>
+<li>Devemos depois adicionar ficheiros e/ou sub-diretórios</li>
 </ul>
 </section><section id="adicionar-ficheiros" class="slide level2">
 <h2>Adicionar ficheiros</h2>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># editar ficheiros </span>
-<span class="co"># e.g. src/foo.c, src/bar.h, README.txt</span>
-<span class="fu">git</span> add src/foo.c
-<span class="fu">git</span> add src/bar.h
-<span class="fu">git</span> add README.txt</code></pre></div>
-<p><br />
-Podemos adicionar vários ficheiros de uma só vez:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> add src/foo.c src/bar.h README.txt</code></pre></div>
-<p><br />
-Os ficheiros ficam na <em>área de estágio</em>; temos de fazer <em>commit</em> para registar na base de dados do <em>Git</em>.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb7-1" title="1"><span class="co"># editar os ficheiros...</span></a>
+<a class="sourceLine" id="cb7-2" title="2">$ <span class="fu">git</span> add src/foo.c</a>
+<a class="sourceLine" id="cb7-3" title="3">$ <span class="fu">git</span> add src/bar.h</a>
+<a class="sourceLine" id="cb7-4" title="4">$ <span class="fu">git</span> add README.txt</a></code></pre></div>
+<ul>
+<li>Podemos adicionar vários ficheiros de uma só vez:</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb8-1" title="1">$ <span class="fu">git</span> add src/foo.c src/bar.h README.txt</a></code></pre></div>
+<ul>
+<li>Os ficheiros ficam na <em>área de estágio</em></li>
+<li>Temos de fazer um <em>commit</em> para os registar no <em>Git</em></li>
+</ul>
 </section><section id="primeiro-commit" class="slide level2">
 <h2>Primeiro <em>commit</em></h2>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> commit -m <span class="st">&quot;initialized repository&quot;</span></code></pre></div>
-<p><br />
-Se omitir a opção <code>-m</code>, o <em>Git</em> abre um editor de texto.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb9-1" title="1">$ <span class="fu">git</span> commit -m <span class="st">&quot;initialized repository&quot;</span></a></code></pre></div>
+<ul>
+<li>Todos os commit têm uma <em>mensagem</em> textual associada</li>
+<li>Se omitir a opção <code>-m</code> o <em>Git</em> abre um editor de texto para compor a mensagem</li>
+</ul>
 </section><section id="modificar-ou-acrescentar" class="slide level2">
 <h2>Modificar ou acrescentar</h2>
 <p>Depois de modificar algum(s) dos ficheiros (e.g. usando um editor de texto) devemos:</p>
@@ -276,21 +312,18 @@ Se omitir a opção <code>-m</code>, o <em>Git</em> abre um editor de texto.</p>
 <li>adicionar os ficheiros modificados à àrea de estágio</li>
 <li>registar um <em>commit</em> com uma mensagem descritiva.</li>
 </ol>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">#  editar ficheiro README.txt</span>
-<span class="co">#  criar ficheiro LICENSE.txt</span>
-<span class="fu">git</span> add README.txt LICENSE.txt
-<span class="fu">git</span> commit -m <span class="st">&quot;modified and created files&quot;</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb10-1" title="1"><span class="co">#  editar / criar ficheiros ...</span></a>
+<a class="sourceLine" id="cb10-2" title="2">$ <span class="fu">git</span> add README.txt LICENSE.txt</a>
+<a class="sourceLine" id="cb10-3" title="3">$ <span class="fu">git</span> commit -m <span class="st">&quot;modified and created files&quot;</span></a></code></pre></div>
 </section><section id="modificar-ou-acrescentar-2" class="slide level2">
 <h2>Modificar ou acrescentar (2)</h2>
-<p>Podemos optar por registar as modificações em dois <em>commits</em> separados:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">#  editar ficheiro README.txt</span>
-<span class="co">#  criar ficheiro LICENSE.txt</span>
-<span class="fu">git</span> add README.txt 
-<span class="fu">git</span> commit -m <span class="st">&quot;modified file&quot;</span>
-<span class="fu">git</span> add LICENSE.txt
-<span class="fu">git</span> commit -m <span class="st">&quot;created file&quot;</span></code></pre></div>
-</section><section id="estados" class="slide level2">
-<h2>Estados</h2>
+<p>Podemos optar por registar as modificações como dois <em>commits</em> separados:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb11-1" title="1">$ <span class="fu">git</span> add README.txt </a>
+<a class="sourceLine" id="cb11-2" title="2">$ <span class="fu">git</span> commit -m <span class="st">&quot;modified file&quot;</span></a>
+<a class="sourceLine" id="cb11-3" title="3">$ <span class="fu">git</span> add LICENSE.txt</a>
+<a class="sourceLine" id="cb11-4" title="4">$ <span class="fu">git</span> commit -m <span class="st">&quot;created file&quot;</span></a></code></pre></div>
+</section><section id="estados-de-um-ficheiro" class="slide level2">
+<h2>Estados de um ficheiro</h2>
 <table>
 <tbody>
 <tr class="odd">
@@ -307,15 +340,17 @@ Se omitir a opção <code>-m</code>, o <em>Git</em> abre um editor de texto.</p>
 </tr>
 </tbody>
 </table>
-<p align="center">
-<img src="images/areas.png" width=600/>
+<p><br />
 </p>
-</section><section id="consultar-o-estado" class="slide level2">
-<h2>Consultar o estado</h2>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> status</code></pre></div>
+<p align="center">
+<img src="images/areas.png" width="480px"/>
+</p>
+</section><section id="consultar-o-estado-do-repositório" class="slide level2">
+<h2>Consultar o estado do repositório</h2>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb12-1" title="1">$ <span class="fu">git</span> status</a></code></pre></div>
 <dl>
 <dt><code>Changes to be commited</code></dt>
-<dd><p>ficheiros modificados <strong>que serão incluidos</strong> no próximo <em>commit</em></p>
+<dd><p>modificações <strong>que serão incluidas</strong> no próximo <em>commit</em></p>
 </dd>
 <dt><code>Changes not staged for commit</code></dt>
 <dd><p>ficheiros modificados mas ainda <strong>não incluidos</strong> no próximo <em>commit</em></p>
@@ -326,48 +361,44 @@ Se omitir a opção <code>-m</code>, o <em>Git</em> abre um editor de texto.</p>
 </dl>
 </section><section id="outras-consultas" class="slide level2">
 <h2>Outras consultas</h2>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> diff  <span class="co"># listar modificações </span>
-<span class="fu">git</span> log   <span class="co"># listar o histórico de commits</span></code></pre></div>
-<p><br />
-Exemplos</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> diff 
-<span class="fu">git</span> diff src/foo.c
-<span class="fu">git</span> log --oneline
-<span class="fu">git</span> log --since=01/04/2017 --author=<span class="st">&quot;Pedro&quot;</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb13-1" title="1">$ <span class="fu">git</span> diff  <span class="co"># listar modificações </span></a>
+<a class="sourceLine" id="cb13-2" title="2">$ <span class="fu">git</span> log   <span class="co"># listar o histórico de commits</span></a></code></pre></div>
+<h3 id="exemplos">Exemplos</h3>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb14-1" title="1">$ <span class="fu">git</span> diff </a>
+<a class="sourceLine" id="cb14-2" title="2">$ <span class="fu">git</span> diff src/foo.c</a>
+<a class="sourceLine" id="cb14-3" title="3">$ <span class="fu">git</span> log --oneline</a>
+<a class="sourceLine" id="cb14-4" title="4">$ <span class="fu">git</span> log --since=01/04/2017 --author=<span class="st">&quot;Pedro&quot;</span></a></code></pre></div>
 <p>(Use <code>--help</code> para obter ajuda completa.)</p>
 </section><section id="checkout" class="slide level2">
 <h2><em>Checkout</em></h2>
-<p>O <em>Git</em> permite &quot;viajar no tempo&quot; de desenvolvimento do projeto.</p>
-<p><br />
-Usamos <code>git checkout</code> para reverter o diretório de trabalho para <em>snapshots</em> específicos.</p>
+<p>O <em>Git</em> permite “viajar no tempo” de desenvolvimento do projeto.</p>
+<p>Usando <code>git checkout</code> podemos reverter o diretório de trabalho para <em>snapshots</em> específicos.</p>
 </section><section id="exemplo" class="slide level2">
 <h2>Exemplo</h2>
 <p>Listar todos os <em>snapshots</em> (mais recente primeiro):</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> log --all --oneline</code></pre></div>
-<blockquote>
-<pre><code>7fd2d99 third commit
-7cf2ce7 second commit
-432bffa first commit</code></pre>
-</blockquote>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># reverter à primeira versão</span>
-<span class="fu">git</span> checkout 432bffa
-
-<span class="co"># avançar até à última versão</span>
-<span class="fu">git</span> checkout 7fd2d99</code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb15-1" title="1">$ <span class="fu">git</span> log --all --oneline</a>
+<a class="sourceLine" id="cb15-2" title="2"><span class="ex">7fd2d99</span> third commit</a>
+<a class="sourceLine" id="cb15-3" title="3"><span class="ex">7cf2ce7</span> second commit</a>
+<a class="sourceLine" id="cb15-4" title="4"><span class="ex">432bffa</span> first commit</a>
+<a class="sourceLine" id="cb15-5" title="5"></a>
+<a class="sourceLine" id="cb15-6" title="6"><span class="co"># reverter ao 1º commit</span></a>
+<a class="sourceLine" id="cb15-7" title="7">$ <span class="fu">git</span> checkout 432bffa</a>
+<a class="sourceLine" id="cb15-8" title="8"></a>
+<a class="sourceLine" id="cb15-9" title="9"><span class="co"># avançar até ao último commit </span></a>
+<a class="sourceLine" id="cb15-10" title="10">$ <span class="fu">git</span> checkout master</a></code></pre></div>
 </section>
-<section id="sincronização-e-colaboração" class="titleslide slide level1"><h1>Sincronização e colaboração</h1></section><section id="repositórios-remotos" class="slide level2">
+<section id="sincronização-e-colaboração" class="title-slide slide level1"><h1>Sincronização e colaboração</h1></section><section id="repositórios-remotos" class="slide level2">
 <h2>Repositórios remotos</h2>
 <p>Em <em>Git</em> todos os repositórios têm a mesma estrutura e suportam os mesmos comandos.</p>
-<p><br />
-Um <em>repositório remoto</em> é apenas um diretório <em>Git</em> que está localizado noutro computador.</p>
+<p>Um repositório remoto é apenas um diretório <em>Git</em> noutro computador!</p>
 </section><section id="copiar-um-repositório-remoto" class="slide level2">
 <h2>Copiar um repositório remoto</h2>
 <p>Se o repositório remoto já foi inicializado:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> clone <span class="op">&lt;</span>url-remoto<span class="op">&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb16-1" title="1">$ <span class="fu">git</span> clone <span class="op">&lt;</span>url-remoto<span class="op">&gt;</span></a></code></pre></div>
 <ul>
 <li>Accesso por HTTPS ou SSH</li>
 <li>Obtemos uma cópia completa podemos editar livremente</li>
-<li>Cria um repositório local num novo diretório com nome do projeto</li>
+<li>Cria num novo diretório com uma <strong>cópia local</strong> do repositório</li>
 </ul>
 <!--
 ## Associar um repositório remoto
@@ -383,43 +414,40 @@ git push -u origin master
 </section><section id="modificar" class="slide level2">
 <h2>Modificar</h2>
 <p>Registamos alterações no repositório local (tal como anteriormente).</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># editar README src/foo.c</span>
-<span class="ex">...</span>
-<span class="fu">git</span> add README src/foo.c
-<span class="fu">git</span> commit</code></pre></div>
-<p><br />
-Este <em>commit</em> é registado <em>apenas</em> no repositório local; ainda nada foi enviado ao servidor remoto!</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb17-1" title="1"><span class="co"># editar README src/foo.c</span></a>
+<a class="sourceLine" id="cb17-2" title="2">$ <span class="fu">git</span> add README src/foo.c</a>
+<a class="sourceLine" id="cb17-3" title="3">$ <span class="fu">git</span> commit </a></code></pre></div>
+<p>O <em>commit</em> é local — nada foi ainda enviado para o repositório remoto.</p>
 </section><section id="enviar-modificações" class="slide level2">
 <h2>Enviar modificações</h2>
-<p>Para enviar os seus <em>commits</em> locais para o repositório remoto usamos o comando <em>push</em>.</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> push</code></pre></div>
+<p>Usamos o comando <em>push</em> para sincronizar <em>commits</em> locais para o repositório remoto.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb18-1" title="1">$ <span class="fu">git</span> push</a></code></pre></div>
 </section><section id="receber-modificações" class="slide level2">
 <h2>Receber modificações</h2>
-<p>Para receber alterações que outros tenham enviado ao repositório remoto usamos <em>pull</em>:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> pull</code></pre></div>
-<p>Este comando descarrega <em>commits</em> no repositório remoto feitos desde a última vez aplica-os ao repositório local.</p>
+<p>Usamos <em>pull</em> para receber <em>commits</em> do repositório remoto:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb19-1" title="1">$ <span class="fu">git</span> pull</a></code></pre></div>
+<p>Este comando descarrega os <em>commits</em> remotos que ainda não não existem no repositório local.</p>
 </section><section id="coordenar-com-colaboradores" class="slide level2">
 <h2>Coordenar com colaboradores</h2>
 <ul>
 <li>Crie um repositório num servidor <em>GitHub/GitLab</em></li>
-<li>Usado como <em>ponto de sincronização</em> entre os computadores/colaboradores</li>
-<li>Começe usando com um único <em>branch</em> de desenvolvimento (<em>master</em>)</li>
+<li>Esse repositório será usado como <em>ponto de sincronização</em> entre os colaboradores</li>
+<li>Começe usando apenas um <em>branch</em> de desenvolvimento (por omissão: <em>master</em>)</li>
 <li>Quando estiver mais experiência, pode introduzir <em>branches</em> distintos para desenvolvimento separado</li>
 </ul>
 </section><section id="merging" class="slide level2">
 <h2><em>Merging</em></h2>
-<p><img src="images/typical-merge.png" height=400 align="right"/></p>
+<p><img src="images/typical-merge.png" height="400px" align="right"/></p>
 <ul>
 <li>Juntar desenvolvimento divergente: operação de <em>merge</em></li>
 <li>O <em>merge</em> introduz num novo <em>snapshot</em> que unifica os ramos divergentes</li>
 <li>O <em>Git</em> tenta fazer <em>merge</em> automático sempre que executamos <code>push</code> ou <code>pull</code></li>
-<li>Mas: o <em>merge</em> automático falha em caso de <strong>conflitos</strong></li>
+<li>Em caso de <strong>conflitos</strong>: o merge automático falha</li>
 </ul>
 </section><section id="conflitos" class="slide level2">
 <h2>Conflitos</h2>
 <p>Se dois <em>commits</em> separados modificarem um mesmo ficheiro o <em>Git</em> pode sinalizar um <strong>conflito</strong>.</p>
-<p><br />
-O conflito é detetado quando tentarmos sincronizar com um repositório remoto (<code>pull</code> ou <code>push</code>).</p>
+<p>O conflito é detetado quando tentarmos sincronizar com um repositório remoto (<code>pull</code> ou <code>push</code>).</p>
 </section><section id="resolver-conflitos" class="slide level2">
 <h2>Resolver conflitos</h2>
 <ol type="1">
@@ -429,15 +457,16 @@ O conflito é detetado quando tentarmos sincronizar com um repositório remoto (
 </ol>
 </section><section id="exemplo-1" class="slide level2">
 <h2>Exemplo</h2>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> pull
-<span class="co"># CONFLICT (content): Merge conflict in file.txt</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb20-1" title="1">$ <span class="fu">git</span> pull</a>
+<a class="sourceLine" id="cb20-2" title="2"><span class="co"># CONFLICT (content): Merge conflict in file.txt</span></a></code></pre></div>
 <pre><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD:file.txt
 Hello world
 =======
 Goodbye
 &gt;&gt;&gt;&gt;&gt;&gt;&gt; 77976da35a11db4... :file.txt</code></pre>
 <p><br />
-Entre <code>&lt;&lt;&lt;&lt;&lt;&lt;</code> e <code>=====</code> é a <strong>modificação local</strong>.</p>
+</p>
+<p>Entre <code>&lt;&lt;&lt;&lt;&lt;&lt;</code> e <code>=====</code> é a <strong>modificação local</strong>.</p>
 <p>Entre <code>======</code> e <code>&gt;&gt;&gt;&gt;&gt;&gt;</code> é a <strong>modificação remota</strong>.</p>
 </section><section id="resolver-o-conflito-1" class="slide level2">
 <h2>Resolver o conflito (1)</h2>
@@ -447,52 +476,52 @@ Goodbye</code></pre>
 </section><section id="resolver-o-conflito-2" class="slide level2">
 <h2>Resolver o conflito (2)</h2>
 <p>Registamos um <em>commit</em> de resolução:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> add file.txt
-<span class="fu">git</span> commit -m <span class="st">&quot;resolver conflito&quot;</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb23-1" title="1">$ <span class="fu">git</span> add file.txt</a>
+<a class="sourceLine" id="cb23-2" title="2">$ <span class="fu">git</span> commit -m <span class="st">&quot;resolução de conflito&quot;</span></a></code></pre></div>
 </section><section id="resolver-o-conflito-3" class="slide level2">
 <h2>Resolver o conflito (3)</h2>
 <p>Por fim, fazemos o <code>push</code> da resolução para o repositório remoto.</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> push</code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb24-1" title="1">$ <span class="fu">git</span> push</a></code></pre></div>
 </section>
-<section id="recomendações" class="titleslide slide level1"><h1>Recomendações</h1></section><section id="escolher-commits" class="slide level2">
+<section id="recomendações" class="title-slide slide level1"><h1>Recomendações</h1></section><section id="escolher-commits" class="slide level2">
 <h2>Escolher <em>commits</em></h2>
 <ul>
 <li>Use <code>git add</code> para juntar alterações relacionadas</li>
-<li>Componha <em>boas mensagens</em>:
+<li>Tente compor boas mensagens:
 <ul>
-<li>não é útil listar os ficheiros alterados</li>
-<li>explicar o <strong>sentido</strong> do <em>commit</em></li>
+<li>não dizer quais os ficheiros alterados</li>
+<li>explicar o <strong>sentido</strong> das alterações</li>
 </ul></li>
 </ul>
-</section><section id="exemplos" class="slide level2">
+</section><section id="exemplos-1" class="slide level2">
 <h2>Exemplos</h2>
-<h3 id="más-mensagens">Más mensagens</h3>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> commit -m <span class="st">&quot;revisão&quot;</span>
-<span class="fu">git</span> commit -m <span class="st">&quot;últimas alterações&quot;</span>
-<span class="fu">git</span> commit -m <span class="st">&quot;alterações do Pedro&quot;</span></code></pre></div>
-<h3 id="boas-mensagens">Boas mensagens</h3>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> commit -m <span class="st">&quot;resolve o bug do prémio&quot;</span>
-<span class="fu">git</span> commit -m <span class="st">&quot;remove duplicação de código&quot;</span>
-<span class="fu">git</span> commit -m <span class="st">&quot;acrescenta contagem de pontuação&quot;</span></code></pre></div>
+<h3 id="ok">OK</h3>
+<pre><code>$ git commit -m &quot;revisão de foo.c&quot;
+$ git commit -m &quot;últimas alterações&quot;
+$ git commit -m &quot;alterações do Pedro&quot;</code></pre>
+<h3 id="melhor">Melhor</h3>
+<pre><code>$ git commit -m &quot;resolve o bug #1234&quot;
+$ git commit -m &quot;remove duplicação de código&quot;
+$ git commit -m &quot;geração de código para ciclos&quot;</code></pre>
 </section>
-<section id="extras" class="titleslide slide level1"><h1>Extras</h1></section><section id="mudar-nomes" class="slide level2">
+<section id="extras" class="title-slide slide level1"><h1>Extras</h1></section><section id="mudar-nomes" class="slide level2">
 <h2>Mudar nomes</h2>
 <p>Como fazer para mudar o nome de um ficheiro ou diretório?</p>
 <h3 id="solução">Solução</h3>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> mv <span class="op">&lt;</span>nome-atual<span class="op">&gt;</span> <span class="op">&lt;</span>nome-novo<span class="op">&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb27-1" title="1">$ <span class="fu">git</span> mv <span class="op">&lt;</span>nome-atual<span class="op">&gt;</span> <span class="op">&lt;</span>nome-novo<span class="op">&gt;</span></a></code></pre></div>
 </section><section id="desfazer-modificações" class="slide level2">
 <h2>Desfazer modificações</h2>
 <p>Editei um ficheiro na área de trabalho, mas agora quero desfazer essas alterações.</p>
 <h3 id="solução-1">Solução</h3>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> checkout -- <span class="op">&lt;</span>ficheiro<span class="op">&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb28-1" title="1">$ <span class="fu">git</span> checkout -- <span class="op">&lt;</span>ficheiro<span class="op">&gt;</span></a></code></pre></div>
 <p>(Reverte modificações para o estado registado no último <em>commit</em>.)</p>
 </section><section id="desfazer-stagging" class="slide level2">
 <h2>Desfazer <em>stagging</em></h2>
 <p>Adicionei um ficheiro à área de estágio, mas afinal não quero incluí-lo no próximo <em>commit</em>.</p>
 <h3 id="solução-2">Solução</h3>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">git</span> reset HEAD <span class="op">&lt;</span>ficheiro<span class="op">&gt;</span></code></pre></div>
-</section><section id="sumário-de-comandos" class="slide level2">
-<h2>Sumário de comandos</h2>
+<div class="sourceCode" id="cb29"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb29-1" title="1">$ <span class="fu">git</span> reset HEAD <span class="op">&lt;</span>ficheiro<span class="op">&gt;</span></a></code></pre></div>
+</section><section id="sumário" class="slide level2">
+<h2>Sumário</h2>
 <table>
 <tbody>
 <tr class="odd">
@@ -533,11 +562,12 @@ Goodbye</code></pre>
 <li><a href="https://www.atlassian.com/git/tutorials/">Atlassian git tutorial</a></li>
 <li><a href="http://gitimmersion.com/">Git immersion</a></li>
 </ul>
-</section><section id="section-2" class="slide level2">
-<h2></h2>
+</section><section id="em-caso-de-desespero--" class="slide level2">
+<h2>Em caso de desespero ;-)</h2>
 <p align="center">
-<img src="images/in-case-of-fire.png" width=500/>
+<img src="images/git.png" width="250px"/>
 </p>
+<h3 id="httpsxkcd.com1597"><a href="https://xkcd.com/1597/">https://xkcd.com/1597/</a></h3>
 </section>
 <!-- {{{{ dzslides core
 #
