@@ -4,10 +4,8 @@ PANDOC= pandoc
 # for HTML slides
 SLIDE_OPTIONS=-s -t dzslides -V css="css/dzslides.css"
 
-# for HTML transcripts
-HTML_OPTIONS= -s -t html 
-
-PDF_OPTIONS=--smart -s -t latex --template=latex.tex
+# for PDF handouts
+PDF_OPTIONS= -s -t latex
 
 %.html : %.md
 	$(PANDOC) $(SLIDE_OPTIONS) $< -o $@
@@ -17,11 +15,12 @@ PDF_OPTIONS=--smart -s -t latex --template=latex.tex
 
 HTML_SLIDES = gitprimer.html
 
-PDF_SLIDES = gitprimer.pdf
+PDF_HANDOUTS = gitprimer.pdf
+
 
 html : $(HTML_SLIDES)
 
-pdf : $(PDF_SLIDES)
+pdf : $(PDF_HANDOUTS)
 
 clean : 
-	rm -f $(HTML_SLIDES) $(PDF_SLIDES)
+	rm -f $(HTML_SLIDES) $(PDF_HANDOUTS)
