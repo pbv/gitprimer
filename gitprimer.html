@@ -247,7 +247,7 @@ $ git config --list
 <h2>Primeiro <em>commit</em></h2>
 <div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb9-1" title="1">$ <span class="fu">git</span> commit -m <span class="st">&quot;initialized repository&quot;</span></a></code></pre></div>
 <ul>
-<li>Todos os commit têm associada uma <em>mensagem</em> textual</li>
+<li>Todos os <em>commits</em> têm associada uma mensagem</li>
 <li>Se omitirmos a opção <code>-m</code>, o <em>Git</em> abre um editor de texto para compor a mensagem</li>
 </ul>
 </section><section id="modificar-ou-acrescentar" class="slide level2">
@@ -322,20 +322,21 @@ $ git config --list
 <h2>Exemplo</h2>
 <p>Listar todos os <em>snapshots</em> (mais recente primeiro):</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb15-1" title="1">$ <span class="fu">git</span> log --all --oneline</a>
-<a class="sourceLine" id="cb15-2" title="2"><span class="ex">7fd2d99</span> third commit</a>
+<a class="sourceLine" id="cb15-2" title="2"><span class="ex">7fd2d99</span> (HEAD -<span class="op">&gt;</span> main, ...) <span class="fu">last</span> commit</a>
 <a class="sourceLine" id="cb15-3" title="3"><span class="ex">7cf2ce7</span> second commit</a>
 <a class="sourceLine" id="cb15-4" title="4"><span class="ex">432bffa</span> first commit</a>
 <a class="sourceLine" id="cb15-5" title="5"></a>
 <a class="sourceLine" id="cb15-6" title="6"><span class="co"># reverter ao primeiro commit</span></a>
 <a class="sourceLine" id="cb15-7" title="7">$ <span class="fu">git</span> checkout 432bffa</a>
-<a class="sourceLine" id="cb15-8" title="8"></a>
-<a class="sourceLine" id="cb15-9" title="9"><span class="co"># avançar até ao último commit </span></a>
-<a class="sourceLine" id="cb15-10" title="10">$ <span class="fu">git</span> checkout master</a></code></pre></div>
+<a class="sourceLine" id="cb15-8" title="8"><span class="co"># avançar até ao último commit </span></a>
+<a class="sourceLine" id="cb15-9" title="9">$ <span class="fu">git</span> checkout 7fd2d99</a>
+<a class="sourceLine" id="cb15-10" title="10"><span class="co"># alternativa</span></a>
+<a class="sourceLine" id="cb15-11" title="11">$ <span class="fu">git</span> checkout main</a></code></pre></div>
 </section>
 <section id="sincronização-e-colaboração" class="title-slide slide level1 titleslide"><h1>Sincronização e colaboração</h1></section><section id="repositórios-remotos" class="slide level2">
 <h2>Repositórios remotos</h2>
 <p>Em <em>Git</em> todos os repositórios têm a mesma estrutura e suportam os mesmos comandos.</p>
-<p>Um repositório remoto é apenas um repositório <em>Git</em> noutro computador!</p>
+<p>Um repositório remoto é apenas um repositório <em>Git</em> num outro computador!</p>
 </section><section id="github-e-gitlab" class="slide level2">
 <h2>Github e Gitlab</h2>
 <ul>
@@ -378,10 +379,10 @@ git push -u origin master
 <h2>Push — enviar modificações</h2>
 <p>Usamos o comando <em>push</em> para enviar <em>commits</em> locais para o repositório remoto que lhe está associado.</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb19-1" title="1">$ <span class="fu">git</span> push</a></code></pre></div>
-<p>Enviar todos os <em>commits</em> que fizemos no repositório local e ainda não existem no repositório remoto.</p>
+<p>Envia todos os <em>commits</em> que fizemos no repositório local e ainda não existem no repositório remoto.</p>
 </section><section id="pull-receber-modificações" class="slide level2">
 <h2>Pull — receber modificações</h2>
-<p>Usamos <em>pull</em> para receber <em>commits</em> do repositório remoto:</p>
+<p>Usamos <em>pull</em> para pedir <em>commits</em> ao repositório remoto:</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb20-1" title="1">$ <span class="fu">git</span> pull</a></code></pre></div>
 <p>Descarrega e aplica todos os <em>commits</em> que existem no repositório remoto e não no repositório local (por exemplo: de outros colaboradores).</p>
 </section><section id="permissões-e-colaboração" class="slide level2">
@@ -399,7 +400,7 @@ git push -u origin master
 <li>Criamos um repositório <em>privado</em> num servidor <em>GitHub</em> ou <em>GitLab</em></li>
 <li>Damos acesso de leitura/escrita aos membros do grupo</li>
 <li>O repositório é usado como <em>ponto de sincronização</em> entre os colaboradores</li>
-<li>Começe usando apenas um <em>branch</em> (por omissão: <em>master</em>)</li>
+<li>Começe usando apenas um <em>branch</em> (por omissão: <em>main</em>)</li>
 <li>Se tiver mais experiência poderá introduzir <em>branches</em> separados</li>
 </ul>
 </section><section id="merge-juntar-ramos-de-desenvolvimento" class="slide level2">
@@ -534,7 +535,6 @@ $ git commit -m &quot;geração de código para ciclos&quot;</code></pre>
 <h2>Mais informação</h2>
 <ul>
 <li><a href="http://git-scm.com/book/en/v2">Git Community Book</a></li>
-<li><a href="http://gitref.org/">Git Reference</a></li>
 <li><a href="https://www.atlassian.com/git/tutorials/">Atlassian git tutorial</a></li>
 <li><a href="http://gitimmersion.com/">Git immersion</a></li>
 </ul>

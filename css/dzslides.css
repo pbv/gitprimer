@@ -3,7 +3,7 @@
   /* A section is a slide. It's size is 800x600, and this will never change */
   section {
       font-family: Arial, serif;
-      font-size: 20pt;
+      font-size: 18pt;
     }
   address, blockquote, dl, fieldset, form, h1, h2, h3, h4, h5, h6, hr, ol, p, pre, table, ul, dl { padding: 10px 20px 10px 20px; }
   h1, h2, h3 {
@@ -14,7 +14,7 @@
     margin: 10px 10px 10px 50px;
   }
   section.titleslide h1 { margin-top: 200px; }
-  h1.title { margin-top: 150px; }
+  h1.title { margin-top: 240px; text-shadow: 2px 3px #e0e0e0;  }
   h1 { font-size: 200%; }
   h2 { font-size: 140%; }
   h3 { font-size: 100%; }
@@ -32,9 +32,9 @@
     position: absolute;
     bottom: 0;
     width: 100%;
-    padding: 40px;
+    padding: 30px;
     text-align: right;
-    background-color: #F3F4F8;
+    background-color: #F3F4F8; 
     border-top: 1px solid #CCC;
   }
 

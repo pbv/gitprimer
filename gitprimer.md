@@ -199,7 +199,7 @@ $ git add src/foo.c src/bar.h README.txt
 $ git commit -m "initialized repository"
 ```
 
-* Todos os commit têm associada uma *mensagem* textual 
+* Todos os *commits* têm associada uma mensagem
 * Se omitirmos a opção `-m`, o *Git* abre um editor de texto 
   para compor a mensagem
 
@@ -303,15 +303,16 @@ Listar todos os *snapshots* (mais recente primeiro):
 
 ~~~bash
 $ git log --all --oneline
-7fd2d99 third commit
+7fd2d99 (HEAD -> main, ...) last commit
 7cf2ce7 second commit
 432bffa first commit
 
 # reverter ao primeiro commit
 $ git checkout 432bffa
-
 # avançar até ao último commit 
-$ git checkout master
+$ git checkout 7fd2d99
+# alternativa
+$ git checkout main
 ~~~
 
 
@@ -322,7 +323,7 @@ $ git checkout master
 Em *Git* todos os repositórios têm a mesma estrutura e suportam os
 mesmos comandos.
 
-Um repositório remoto é apenas um repositório *Git* noutro computador!
+Um repositório remoto é apenas um repositório *Git* num outro computador!
 
 ## Github e Gitlab
 
@@ -388,13 +389,14 @@ para o repositório remoto que lhe está associado.
 $ git push
 ~~~
 
-Enviar todos os *commits* que fizemos no repositório local 
+ 
+Envia todos os *commits* que fizemos no repositório local 
 e ainda não existem no repositório remoto.
 
 
 ## Pull &mdash; receber modificações
 
-Usamos *pull* para receber *commits* do repositório remoto:
+Usamos *pull* para pedir *commits* ao repositório remoto:
 
 ~~~bash
 $ git pull
@@ -414,7 +416,7 @@ e não no repositório local (por exemplo: de outros colaboradores).
 * Criamos um repositório *privado* num servidor *GitHub* ou *GitLab*
 * Damos acesso de leitura/escrita aos membros do grupo
 * O repositório é usado como *ponto de sincronização* entre os colaboradores
-* Começe usando apenas um *branch* (por omissão: *master*)
+* Começe usando apenas um *branch* (por omissão: *main*)
 * Se tiver mais experiência poderá introduzir *branches*
   separados 
 
@@ -584,7 +586,6 @@ $ git reset HEAD <ficheiro>
 ## Mais informação
 
 * [Git Community Book](http://git-scm.com/book/en/v2)
-* [Git Reference](http://gitref.org/)
 * [Atlassian git tutorial](https://www.atlassian.com/git/tutorials/)
 * [Git immersion](http://gitimmersion.com/)
 
