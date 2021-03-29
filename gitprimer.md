@@ -1,10 +1,16 @@
 ---
-title: Introdução ao *Git*
+title: "*The Git Kune Do*"
 author: Pedro Vasconcelos, DCC/FCUP
-date: setembro 2020
+date: março 2021
 ...
 
-# Introdução ao *Git* {.titleslide}
+
+<section class="title">
+<center>
+<img src="./images/JeetKuneDo_book.png" width="75%" style="opacity:90%;position:absolute; top:0px; left:12%; right:12%; z-index:-1;"/>
+</center>
+</section>
+
 
 ## Esta apresentação
 
